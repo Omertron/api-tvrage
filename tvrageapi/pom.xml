@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.moviejukebox</groupId>
 	<artifactId>tvrageapi</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>TV Rage API</name>
 
 	<issueManagement>
@@ -20,10 +20,9 @@
 		<url>http://mediadeveloper.org:8080/job/API-TvRage/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:http://javatvrageapi.googlecode.com/svn/tags/tvrageapi-1.0</connection>
-		<developerConnection>scm:svn:https://javatvrageapi.googlecode.com/svn/tags/tvrageapi-1.0</developerConnection>
-		<tag>HEAD</tag>
-		<url>http://code.google.com/p/javatvrageapi/source/browse/tags/tvrageapi-1.0</url>
+		<connection>scm:svn:http://javatvrageapi.googlecode.com/svn/trunk/tvrageapi</connection>
+		<developerConnection>scm:svn:https://javatvrageapi.googlecode.com/svn/trunk/tvrageapi</developerConnection>
+		<url>http://code.google.com/p/javatvrageapi/source/browse/trunk/tvrageapi</url>
 	</scm>
 
 	<properties>
