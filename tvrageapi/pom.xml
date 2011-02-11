@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -10,7 +8,7 @@
 	</parent>
 	<groupId>com.moviejukebox</groupId>
 	<artifactId>tvrageapi</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>TV Rage API</name>
 
 	<issueManagement>
@@ -22,10 +20,10 @@
 		<url>http://mediadeveloper.org:8080/job/API-TvRage/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:http://javatvrageapi.googlecode.com/svn/trunk/tvrageapi</connection>
-		<developerConnection>scm:svn:https://javatvrageapi.googlecode.com/svn/trunk/tvrageapi</developerConnection>
+		<connection>scm:svn:http://javatvrageapi.googlecode.com/svn/tags/tvrageapi-1.0</connection>
+		<developerConnection>scm:svn:https://javatvrageapi.googlecode.com/svn/tags/tvrageapi-1.0</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://code.google.com/p/javatvrageapi/source/browse/trunk/tvrageapi</url>
+		<url>http://code.google.com/p/javatvrageapi/source/browse/tags/tvrageapi-1.0</url>
 	</scm>
 
 	<properties>
