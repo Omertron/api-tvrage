@@ -12,7 +12,8 @@
  */
 package com.moviejukebox.tvrage.model;
 
-import static com.moviejukebox.tvrage.tools.StringTools.*;
+import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
+import static com.moviejukebox.tvrage.TVRage.isValidString;
 
 import java.util.Map;
 import java.util.TreeMap;

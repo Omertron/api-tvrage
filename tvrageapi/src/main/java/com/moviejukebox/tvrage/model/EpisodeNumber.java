@@ -12,7 +12,7 @@
  */
 package com.moviejukebox.tvrage.model;
 
-import static com.moviejukebox.tvrage.tools.StringTools.convertStrToInt;
+import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
 
 public class EpisodeNumber implements Comparable<EpisodeNumber> {
     private static final int factor = 1000;

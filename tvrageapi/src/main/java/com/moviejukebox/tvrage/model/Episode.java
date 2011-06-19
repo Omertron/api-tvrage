@@ -12,7 +12,7 @@
  */
 package com.moviejukebox.tvrage.model;
 
-import static com.moviejukebox.tvrage.tools.StringTools.isValidString;
+import static com.moviejukebox.tvrage.TVRage.isValidString;
 
 import java.util.Date;
 

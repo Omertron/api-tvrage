@@ -12,9 +12,6 @@
  */
 package com.moviejukebox.tvrage;
 
-import static com.moviejukebox.tvrage.tools.StringTools.convertStrToInt;
-import static com.moviejukebox.tvrage.tools.StringTools.isValidString;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -203,4 +200,25 @@ public class TVRage {
 		return tvrageURL;
 	}
 	
+	public static int convertStrToInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (Exception ignore) {
+            return 0;
+        }
+    }
+    
+    /**
+     * Check the string passed to see if it contains a value.
+     * @param testString The string to test
+     * @return False if the string is empty, null or UNKNOWN, True otherwise
+     */
+    public static boolean isValidString(String testString) {
+        if ((testString == null)
+                || (testString.trim().equals(""))
+                || (testString.equalsIgnoreCase(TVRage.UNKNOWN))) {
+            return false;
+        }
+        return true;
+    }
 }

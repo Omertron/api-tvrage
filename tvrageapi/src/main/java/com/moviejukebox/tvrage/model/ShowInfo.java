@@ -12,15 +12,14 @@
  */
 package com.moviejukebox.tvrage.model;
 
-import static com.moviejukebox.tvrage.tools.StringTools.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.pojava.datetime.DateTime;
+import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
+import static com.moviejukebox.tvrage.TVRage.isValidString;
 
 import com.moviejukebox.tvrage.TVRage;
-import com.moviejukebox.tvrage.tools.StringTools;
 
 /**
  * Full information about the show
@@ -286,7 +285,7 @@ public class ShowInfo {
 	}
 	
 	public void setStartDate(String startDate) {
-	    if (StringTools.isValidString(startDate)) {
+	    if (isValidString(startDate)) {
 	        try {
 	            this.startDate = (new DateTime(startDate)).toDate();
 	        } catch (Exception ignore) {

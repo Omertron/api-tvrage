@@ -12,8 +12,9 @@
  */
 package com.moviejukebox.tvrage.model;
 
+import static com.moviejukebox.tvrage.TVRage.isValidString;
+
 import com.moviejukebox.tvrage.TVRage;
-import static com.moviejukebox.tvrage.tools.StringTools.*;
 
 /**
  * Class to hold country along with a generic detail string
