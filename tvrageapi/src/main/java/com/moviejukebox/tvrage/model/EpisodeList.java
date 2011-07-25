@@ -30,7 +30,7 @@ public class EpisodeList {
 
     private String showName;
     private int totalSeasons;
-    TreeMap<EpisodeNumber, Episode> episodeList;
+    private Map<EpisodeNumber, Episode> episodeList;
     
     public EpisodeList() {
         showName = UNKNOWN;
@@ -50,7 +50,7 @@ public class EpisodeList {
         return episodeList;
     }
 
-    public void setEpisodeList(TreeMap<EpisodeNumber, Episode> episodeList) {
+    public void setEpisodeList(Map<EpisodeNumber, Episode> episodeList) {
         this.episodeList = episodeList;
     }
     

@@ -12,12 +12,14 @@
  */
 package com.moviejukebox.tvrage.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.pojava.datetime.DateTime;
 import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
 import static com.moviejukebox.tvrage.TVRage.isValidString;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.pojava.datetime.DateTime;
 
 import com.moviejukebox.tvrage.TVRage;
 
@@ -27,26 +29,26 @@ import com.moviejukebox.tvrage.TVRage;
  *
  */
 public class ShowInfo {
-    private static final String UNKNOWN = TVRage.UNKNOWN;
-	private String airDay          = UNKNOWN;
-	private String airTime         = UNKNOWN;
-	private ArrayList<CountryDetail> akas     = new ArrayList<CountryDetail>();
-	private String classification  = UNKNOWN;
-	private String country         = UNKNOWN;
-	private String ended           = UNKNOWN;
-	private ArrayList<String>        genres   = new ArrayList<String>();
-	private ArrayList<CountryDetail> network  = new ArrayList<CountryDetail>();
-	private String originCountry   = UNKNOWN;
-	private int    runtime         = 0;
-	private int    showID          = 0;
-	private String showLink        = UNKNOWN;
-	private String showName        = UNKNOWN;
-	private Date   startDate       = null;
-	private int    started         = 0;
-    private String status          = UNKNOWN;
-    private String summary         = UNKNOWN;
-	private String timezone        = UNKNOWN;
-	private int    totalSeasons    = 0;
+    private static final String UNKNOWN    = TVRage.UNKNOWN;
+	private String airDay                  = UNKNOWN;
+	private String airTime                 = UNKNOWN;
+	private List<CountryDetail> akas       = new ArrayList<CountryDetail>();
+	private String classification          = UNKNOWN;
+	private String country                 = UNKNOWN;
+	private String ended                   = UNKNOWN;
+	private List<String>        genres     = new ArrayList<String>();
+	private List<CountryDetail> network    = new ArrayList<CountryDetail>();
+	private String originCountry           = UNKNOWN;
+	private int    runtime                 = 0;
+	private int    showID                  = 0;
+	private String showLink                = UNKNOWN;
+	private String showName                = UNKNOWN;
+	private Date   startDate               = null;
+	private int    started                 = 0;
+    private String status                  = UNKNOWN;
+    private String summary                 = UNKNOWN;
+	private String timezone                = UNKNOWN;
+	private int    totalSeasons            = 0;
 	
 	public boolean isValid() {
 	    if (showID > 0) {
@@ -120,7 +122,7 @@ public class ShowInfo {
 		return airTime;
 	}
 
-	public ArrayList<CountryDetail> getAkas() {
+	public List<CountryDetail> getAkas() {
 		return akas;
 	}
 
@@ -136,11 +138,11 @@ public class ShowInfo {
 		return ended;
 	}
 	
-    public ArrayList<String> getGenres() {
+    public List<String> getGenres() {
 		return genres;
 	}
     
-	public ArrayList<CountryDetail> getNetwork() {
+	public List<CountryDetail> getNetwork() {
 		return network;
 	}
 	
@@ -204,7 +206,7 @@ public class ShowInfo {
 	    }
 	}
 	
-	public void setAkas(ArrayList<CountryDetail> akas) {
+	public void setAkas(List<CountryDetail> akas) {
 		this.akas = akas;
 	}
 	
@@ -232,11 +234,11 @@ public class ShowInfo {
         }
 	}
     
-	public void setGenres(ArrayList<String> genres) {
+	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
 	
-	public void setNetwork(ArrayList<CountryDetail> network) {
+	public void setNetwork(List<CountryDetail> network) {
 		this.network = network;
 	}
 	

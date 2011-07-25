@@ -31,8 +31,14 @@ import com.moviejukebox.tvrage.model.EpisodeNumber;
 import com.moviejukebox.tvrage.model.ShowInfo;
 
 public class TVRageParser {
-    private static final String logMessage = "TVRage Error: ";
-    static Logger logger = TVRage.getLogger();
+    private static final String LOG_MESSAGE = "TVRage Error: ";
+    private static Logger logger = TVRage.getLogger();
+
+    // Hide the constructor
+    protected TVRageParser() {
+        // prevents calls from subclass
+        throw new UnsupportedOperationException();
+    }
 
     public static Episode getEpisodeInfo(String searchUrl) {
         Document doc = null;
@@ -41,7 +47,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(logMessage + error.getMessage());
+            logger.severe(LOG_MESSAGE + error.getMessage());
             return episode;
         }
         
@@ -69,7 +75,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(logMessage + error.getMessage());
+            logger.severe(LOG_MESSAGE + error.getMessage());
             return epList;
         }
         
@@ -134,7 +140,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(logMessage + error.getMessage());
+            logger.severe(LOG_MESSAGE + error.getMessage());
             return showList;
         }
         
@@ -168,7 +174,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(logMessage + error.getMessage());
+            logger.severe(LOG_MESSAGE + error.getMessage());
             return showList;
         }
         

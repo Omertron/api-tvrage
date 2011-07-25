@@ -47,6 +47,12 @@ public final class WebBrowser {
         cookies = new HashMap<String, Map<String, String>>();
     }
     
+    // Hide the constructor
+    protected WebBrowser() {
+        // prevents calls from subclass
+        throw new UnsupportedOperationException();
+    }
+    
     public static String request(String url) throws IOException {
         return request(new URL(url));
     }
@@ -90,12 +96,10 @@ public final class WebBrowser {
                 if (in != null) {
                     in.close();
                 }
-                
-                if ((cnx != null) && (cnx instanceof HttpURLConnection)) {
+                if (cnx != null && cnx instanceof HttpURLConnection) {
                     ((HttpURLConnection)cnx).disconnect();
                 }
             }
-            
             return content.toString();
         } finally {
             if (content != null) {
@@ -211,7 +215,7 @@ public final class WebBrowser {
         WebBrowser.proxyPort = tvdbProxyPort;
     }
 
-    public static String getTvdbProxyUsername() {
+    public static String getProxyUsername() {
         return proxyUsername;
     }
 

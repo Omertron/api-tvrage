@@ -35,7 +35,13 @@ import com.moviejukebox.tvrage.TVRage;
  *
  */
 public class DOMHelper {
-    static Logger logger = TVRage.getLogger();
+    private static Logger logger = TVRage.getLogger();
+
+    // Hide the constructor
+    protected DOMHelper() {
+        // prevents calls from subclass
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * Gets the string value of the tag element name passed

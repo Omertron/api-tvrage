@@ -15,7 +15,7 @@ package com.moviejukebox.tvrage.model;
 import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
 
 public class EpisodeNumber implements Comparable<EpisodeNumber> {
-    private static final int factor = 1000;
+    private static final int FACTOR = 1000;
     private int absolute;   // The absolute episode number across all seasons
     private int episode;    // The episode number within the season
     private int season;     // The show season
@@ -54,7 +54,7 @@ public class EpisodeNumber implements Comparable<EpisodeNumber> {
     
     private int calculateAbsolute(int season, int episode) {
         // Make the season very large for comparison purposes (will handle up to 1,000 episodes)
-        return ((season * factor) + episode);
+        return ((season * FACTOR) + episode);
     }
 
     @Override
