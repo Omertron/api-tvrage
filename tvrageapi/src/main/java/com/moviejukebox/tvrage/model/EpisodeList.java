@@ -93,4 +93,17 @@ public class EpisodeList {
     public void setTotalSeasons(String totalSeasons) {
         this.totalSeasons = convertStrToInt(totalSeasons);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[EpisodeList=[showName=");
+        builder.append(showName);
+        builder.append("][totalSeasons=");
+        builder.append(totalSeasons);
+        builder.append("][episodeList=");
+        builder.append(episodeList);
+        builder.append("]]");
+        return builder.toString();
+    }
 }

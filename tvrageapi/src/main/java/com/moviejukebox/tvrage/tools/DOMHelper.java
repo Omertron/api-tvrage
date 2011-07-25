@@ -46,14 +46,10 @@ public class DOMHelper {
     public static String getValueFromElement(Element element, String tagName) {
         String returnValue = "";
 
-        try {
-            NodeList elementNodeList = element.getElementsByTagName(tagName);
-            Element tagElement = (Element) elementNodeList.item(0);
-            NodeList tagNodeList = tagElement.getChildNodes();
-            returnValue = ((Node) tagNodeList.item(0)).getNodeValue();
-        } catch (Exception ignore) {
-            return returnValue;
-        }
+        NodeList elementNodeList = element.getElementsByTagName(tagName);
+        Element tagElement = (Element) elementNodeList.item(0);
+        NodeList tagNodeList = tagElement.getChildNodes();
+        returnValue = ((Node) tagNodeList.item(0)).getNodeValue();
 
         return returnValue;
     }
@@ -93,10 +89,6 @@ public class DOMHelper {
                 doc = db.parse(in);
                 doc.getDocumentElement().normalize();
             }
-        } catch (Exception error) {
-            logger.fine("Error parsing: " + url);
-            // Some sort of error occurred getting the data, so clear the document
-            doc = null;
         } finally {
             if (in != null) {
                 in.close();

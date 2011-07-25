@@ -151,20 +151,28 @@ public class Episode {
 	}
 	
 	@Override
-	public String toString() {
-	    StringBuffer sb = new StringBuffer();
-	    sb.append("Season: " + episodeNumber.getSeason() + ", ");
-        sb.append("Episode: " + episodeNumber.getEpisode() + ", ");
-        sb.append("Production Id: " + productionId + ", ");
-        sb.append("Air Date: " + airDate + ", ");
-        sb.append("Link: " + link + ", ");
-        sb.append("Title: " + title + ", ");
-        sb.append("Summary: " + summary + ", ");
-        sb.append("Rating: " + rating);
-	    
-	    return sb.toString();
-	}
-
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[Episode=[episodeNumber=");
+        builder.append(episodeNumber);
+        builder.append("][productionId=");
+        builder.append(productionId);
+        builder.append("][airDate=");
+        builder.append(airDate);
+        builder.append("][link=");
+        builder.append(link);
+        builder.append("][title=");
+        builder.append(title);
+        builder.append("][summary=");
+        builder.append(summary);
+        builder.append("][rating=");
+        builder.append(rating);
+        builder.append("][screenCap=");
+        builder.append(screenCap);
+        builder.append("]]");
+        return builder.toString();
+    }
+	
     public String getScreenCap() {
         return screenCap;
     }

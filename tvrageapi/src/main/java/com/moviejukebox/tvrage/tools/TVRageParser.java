@@ -64,7 +64,6 @@ public class TVRageParser {
 
     public static EpisodeList getEpisodeList(String searchUrl) {
         EpisodeList epList = new EpisodeList();
-        Episode episode = new Episode();
         Document doc = null;
         
         try {
@@ -118,8 +117,7 @@ public class TVRageParser {
                     Node nEpisode = nlEpisode.item(eLoop);
                     if (nEpisode.getNodeType() == Node.ELEMENT_NODE) {
                         Element eEpisode = (Element) nEpisode;
-                        episode = parseEpisode(eEpisode, season);
-                        epList.addEpisode(episode);
+                        epList.addEpisode(parseEpisode(eEpisode, season));
                     }
                 }
             }

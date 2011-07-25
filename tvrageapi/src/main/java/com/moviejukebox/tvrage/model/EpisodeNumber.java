@@ -65,37 +65,6 @@ public class EpisodeNumber implements Comparable<EpisodeNumber> {
         return calculateAbsolute(season, episode) - calculateAbsolute(otherSeason, otherEpisode);
     }
     
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        
-        if (obj == null) {
-            return false;
-        }
-        
-        if (getClass() != obj.getClass())
-            return false;
-
-        EpisodeNumber other = (EpisodeNumber) obj;
-        
-        if (absolute == other.absolute) {
-            // If the absolute matches, then assume the season and episode will
-            return true;
-        }
-        
-        if (season != other.season) {
-            return false;
-        }
-        
-        if (episode != other.episode) {
-            return false;
-        }
-
-        return true;
-    }
-    
     public int getAbsolute() {
         return absolute;
     }
@@ -142,12 +111,15 @@ public class EpisodeNumber implements Comparable<EpisodeNumber> {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Season: " + season + ", ");
-        sb.append("Episode: " + episode + ", ");
-        sb.append("Absolute: " + absolute);
-        
-        return sb.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("[EpisodeNumber=[absolute=");
+        builder.append(absolute);
+        builder.append("][episode=");
+        builder.append(episode);
+        builder.append("][season=");
+        builder.append(season);
+        builder.append("]]");
+        return builder.toString();
     }
 
     public boolean isValid() {
@@ -156,6 +128,48 @@ public class EpisodeNumber implements Comparable<EpisodeNumber> {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + absolute;
+        result = prime * result + episode;
+        result = prime * result + season;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        
+        if (obj == null) {
+            return false;
+        }
+        
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        EpisodeNumber other = (EpisodeNumber) obj;
+        
+        if (absolute == other.absolute) {
+            // If the absolute matches, then assume the season and episode will
+            return true;
+        }
+        
+        if (season != other.season) {
+            return false;
+        }
+        
+        if (episode != other.episode) {
+            return false;
+        }
+
+        return true;
     }
 
 }

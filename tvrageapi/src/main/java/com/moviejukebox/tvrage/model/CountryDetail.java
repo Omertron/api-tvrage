@@ -61,12 +61,15 @@ public class CountryDetail {
 	}
 	
 	@Override
-	public String toString() {
-	    StringBuffer sb = new StringBuffer();
-	    sb.append("Country: " + country + ", ");
-	    sb.append("Detail: " + detail);
-	    return sb.toString();
-	}
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[CountryDetail=[country=");
+        builder.append(country);
+        builder.append("][detail=");
+        builder.append(detail);
+        builder.append("]]");
+        return builder.toString();
+    }
 
 	public boolean isValid() {
 	    if (!isValidString(country)) {

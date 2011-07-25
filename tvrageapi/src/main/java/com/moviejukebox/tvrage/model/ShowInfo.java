@@ -290,6 +290,7 @@ public class ShowInfo {
 	            this.startDate = (new DateTime(startDate)).toDate();
 	        } catch (Exception ignore) {
 	            // We can't do anything about this error, so return
+	            this.startDate = null;
 	        }
 	    }
     }
@@ -333,5 +334,50 @@ public class ShowInfo {
 	public void setTotalSeasons(String totalSeasons) {
 	    this.totalSeasons = convertStrToInt(totalSeasons);
 	}
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[ShowInfo=[airDay=");
+        builder.append(airDay);
+        builder.append("][airTime=");
+        builder.append(airTime);
+        builder.append("][akas=");
+        builder.append(akas);
+        builder.append("][classification=");
+        builder.append(classification);
+        builder.append("][country=");
+        builder.append(country);
+        builder.append("][ended=");
+        builder.append(ended);
+        builder.append("][genres=");
+        builder.append(genres);
+        builder.append("][network=");
+        builder.append(network);
+        builder.append("][originCountry=");
+        builder.append(originCountry);
+        builder.append("][runtime=");
+        builder.append(runtime);
+        builder.append("][showID=");
+        builder.append(showID);
+        builder.append("][showLink=");
+        builder.append(showLink);
+        builder.append("][showName=");
+        builder.append(showName);
+        builder.append("][startDate=");
+        builder.append(startDate);
+        builder.append("][started=");
+        builder.append(started);
+        builder.append("][status=");
+        builder.append(status);
+        builder.append("][summary=");
+        builder.append(summary);
+        builder.append("][timezone=");
+        builder.append(timezone);
+        builder.append("][totalSeasons=");
+        builder.append(totalSeasons);
+        builder.append("]]");
+        return builder.toString();
+    }
 
 }
