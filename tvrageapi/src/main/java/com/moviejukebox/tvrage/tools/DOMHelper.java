@@ -15,7 +15,6 @@ package com.moviejukebox.tvrage.tools;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,16 +26,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.moviejukebox.tvrage.TVRage;
-
 /**
  * Generic set of routines to process the DOM model data
  * @author Stuart.Boston
  *
  */
 public class DOMHelper {
-    private static Logger logger = TVRage.getLogger();
-
     // Hide the constructor
     protected DOMHelper() {
         // prevents calls from subclass
@@ -52,11 +47,15 @@ public class DOMHelper {
     public static String getValueFromElement(Element element, String tagName) {
         String returnValue = "";
 
-        NodeList elementNodeList = element.getElementsByTagName(tagName);
-        Element tagElement = (Element) elementNodeList.item(0);
-        NodeList tagNodeList = tagElement.getChildNodes();
-        returnValue = ((Node) tagNodeList.item(0)).getNodeValue();
-
+        try {
+            NodeList elementNodeList = element.getElementsByTagName(tagName);
+            Element tagElement = (Element) elementNodeList.item(0);
+            NodeList tagNodeList = tagElement.getChildNodes();
+            returnValue = ((Node) tagNodeList.item(0)).getNodeValue();
+        } catch (NullPointerException error) {
+            return "";
+        }
+        
         return returnValue;
     }
 
@@ -75,26 +74,14 @@ public class DOMHelper {
         String webPage = null;
         
         try {
-            boolean validWebPage = false;
             webPage = WebBrowser.request(url);
            
-            // There seems to be an error with some of the web pages that returns garbage
-            if (webPage.startsWith("<?xml version")) {
-                // This looks like a valid web page
-                validWebPage = true;
-            } else {
-                logger.fine("Error with API Call for: " + url);
-                return null;
-            }
-            
-            if (validWebPage) {
-                in = new ByteArrayInputStream(webPage.getBytes("UTF-8"));
-    
-                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                DocumentBuilder db = dbf.newDocumentBuilder();
-                doc = db.parse(in);
-                doc.getDocumentElement().normalize();
-            }
+            in = new ByteArrayInputStream(webPage.getBytes("UTF-8"));
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            doc = db.parse(in);
+            doc.getDocumentElement().normalize();
         } finally {
             if (in != null) {
                 in.close();

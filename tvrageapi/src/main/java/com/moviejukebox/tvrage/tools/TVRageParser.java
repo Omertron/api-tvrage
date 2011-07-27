@@ -229,7 +229,7 @@ public class TVRageParser {
         episode.setSummary(DOMHelper.getValueFromElement(eEpisodeInfo, "summary"));
         
         // Process the season & episode field
-        Pattern pattern = Pattern.compile("(\\d)[x](\\d)");
+        Pattern pattern = Pattern.compile("(\\d*)[x](\\d*)");
         Matcher matcher = pattern.matcher(DOMHelper.getValueFromElement(eEpisodeInfo, "number"));
         if (matcher.find()) {
             EpisodeNumber en = new EpisodeNumber();
@@ -243,22 +243,32 @@ public class TVRageParser {
 
     private static ShowInfo parseNextShowInfo(Element eShowInfo) {
         ShowInfo showInfo = new ShowInfo();
-
+        String text;
+        
         // ShowID
         showInfo.setShowID(DOMHelper.getValueFromElement(eShowInfo, "showid"));
         
         // ShowName
-        showInfo.setShowName(DOMHelper.getValueFromElement(eShowInfo, "showname"));
-        showInfo.setShowName(DOMHelper.getValueFromElement(eShowInfo, "name"));
+        text = DOMHelper.getValueFromElement(eShowInfo, "showname");
+        if (!TVRage.isValidString(text)) {
+            text = DOMHelper.getValueFromElement(eShowInfo, "name");
+        } 
+        showInfo.setShowName(text);
         
         // ShowLink
-        showInfo.setShowLink(DOMHelper.getValueFromElement(eShowInfo, "showlink"));
-        showInfo.setShowLink(DOMHelper.getValueFromElement(eShowInfo, "link"));
+        text = DOMHelper.getValueFromElement(eShowInfo, "showlink");
+        if (!TVRage.isValidString(text)) {
+            text = DOMHelper.getValueFromElement(eShowInfo, "link");
+        }
+        showInfo.setShowLink(text);
         
         // Country
-        showInfo.setCountry(DOMHelper.getValueFromElement(eShowInfo, "country"));
-        showInfo.setCountry(DOMHelper.getValueFromElement(eShowInfo, "origin_country"));
-        
+        text = DOMHelper.getValueFromElement(eShowInfo, "country");
+        if (!TVRage.isValidString(text)) {
+            text = DOMHelper.getValueFromElement(eShowInfo, "origin_country");
+        }
+        showInfo.setCountry(text);
+
         // Started
         showInfo.setStarted(DOMHelper.getValueFromElement(eShowInfo, "started"));
 

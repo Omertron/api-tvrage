@@ -88,11 +88,12 @@ public class TVRage {
 	        return new Episode();
 	    }
 
-	    String tvrageUrl = buildURL(API_EPISODE_INFO, showID);
+	    StringBuilder tvrageURL = buildURL(API_EPISODE_INFO, showID);
 	    // Append the Season & Episode to the URL
-	    tvrageUrl += seasonId + "x" + episodeId;
+	    tvrageURL.append("&ep=").append(seasonId);
+	    tvrageURL.append("x").append(episodeId);
 	    
-	    return TVRageParser.getEpisodeInfo(tvrageUrl);
+	    return TVRageParser.getEpisodeInfo(tvrageURL.toString());
 	}
 	
 	/**
@@ -105,7 +106,7 @@ public class TVRage {
 			return new EpisodeList();
 		}
 		
-        String tvrageURL = buildURL(API_EPISODE_LIST, showID);
+        String tvrageURL = buildURL(API_EPISODE_LIST, showID).toString();
 		return TVRageParser.getEpisodeList(tvrageURL);
 	}
 
@@ -115,13 +116,11 @@ public class TVRage {
 	 * @return ShowInfo
 	 */
 	public ShowInfo getShowInfo(int showID) {
-		String tvrageURL = null;
-		
 		if (showID == 0) {
 			return new ShowInfo();
 		}
 		
-		tvrageURL = buildURL(API_SHOWINFO, Integer.toString(showID));
+		String tvrageURL = buildURL(API_SHOWINFO, Integer.toString(showID)).toString();
 		List<ShowInfo> showList = TVRageParser.getShowInfo(tvrageURL);
 		if (showList.isEmpty()) {
 		    return new ShowInfo();
@@ -144,13 +143,12 @@ public class TVRage {
 	 * @return list of matching shows
 	 */
 	public List<ShowInfo> searchShow(String showName) {
-		String tvrageURL = null;
 		
 		if (!isValidString(showName)) {
 			return new ArrayList<ShowInfo>();
 		}
 		
-		tvrageURL = buildURL(API_SEARCH, showName);
+		String tvrageURL = buildURL(API_SEARCH, showName).toString();
 		return TVRageParser.getSearchShow(tvrageURL);
 	}
 	
@@ -176,26 +174,32 @@ public class TVRage {
 	 * @param urlParameter
 	 * @return
 	 */
-	private String buildURL(String urlParameter, String urlData) {
+	private StringBuilder buildURL(String urlParameter, String urlData) {
 		// apiSite + search.php 	  + apiKey + &show=buffy
 		// apiSite + showinfo.php 	  + apiKey + &sid=2930
 		// apiSite + episode_list.php + apiKey + &sid=2930	
-		String tvrageURL = API_SITE + urlParameter + "?key=" + apiKey + "&";
+		
+		StringBuilder tvrageURL = new StringBuilder();
+		tvrageURL.append(API_SITE);
+		tvrageURL.append(urlParameter);
+        tvrageURL.append("?key=");
+        tvrageURL.append(apiKey);
+        tvrageURL.append("&");
 		
 		if (urlParameter.equalsIgnoreCase(API_SEARCH)) {
-			tvrageURL += "show=" + urlData;
+			tvrageURL.append("show=").append(urlData);
 		} else if (urlParameter.equalsIgnoreCase(API_SHOWINFO)) {
-			tvrageURL += "sid=" + urlData;
+		    tvrageURL.append("sid=").append(urlData);
 		} else if (urlParameter.equalsIgnoreCase(API_EPISODE_LIST)) {
-			tvrageURL += "sid=" + urlData;
+		    tvrageURL.append("sid=").append(urlData);
 		} else if (urlParameter.equalsIgnoreCase(API_EPISODE_INFO)) {
-		    tvrageURL += "sid=" + urlData;
+		    tvrageURL.append("sid=").append(urlData);
 		    // Note this needs the season & episode appending to the url
 		} else {
-			tvrageURL = UNKNOWN;
+		    return new StringBuilder(UNKNOWN);
 		}
 		
-		logger.finer("Search URL: " + tvrageURL); // XXX DEBUG
+//		System.out.println("Search URL: " + tvrageURL); // XXX DEBUG
 		
 		return tvrageURL;
 	}
