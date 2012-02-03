@@ -1,14 +1,14 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.tools;
 
@@ -26,14 +26,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * Web browser with simple cookies support
  */
 public final class WebBrowser {
-    
+
     private static Map<String, String> browserProperties = new HashMap<String, String>();
-    private static Map<String, Map<String, String>> cookies;
+    private static Map<String, Map<String, String>> cookies = new HashMap<String, Map<String, String>>();
     private static String proxyHost = null;
     private static String proxyPort = null;
     private static String proxyUsername = null;
@@ -42,34 +43,38 @@ public final class WebBrowser {
     private static int webTimeoutConnect = 25000;   // 25 second timeout
     private static int webTimeoutRead = 90000;      // 90 second timeout
 
-    static {
-        browserProperties.put("User-Agent", "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)");
-        cookies = new HashMap<String, Map<String, String>>();
-    }
-    
     // Hide the constructor
     protected WebBrowser() {
         // prevents calls from subclass
         throw new UnsupportedOperationException();
     }
-    
+
+    /**
+     * Populate the browser properties
+     */
+    private static void populateBrowserProperties() {
+        if (browserProperties.isEmpty()) {
+            browserProperties.put("User-Agent", "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)");
+        }
+    }
+
     public static String request(String url) throws IOException {
         return request(new URL(url));
     }
-    
+
     public static URLConnection openProxiedConnection(URL url) throws IOException {
         if (proxyHost != null) {
             System.getProperties().put("proxySet", "true");
             System.getProperties().put("proxyHost", proxyHost);
             System.getProperties().put("proxyPort", proxyPort);
         }
-        
+
         URLConnection cnx = url.openConnection();
-        
+
         if (proxyUsername != null) {
             cnx.setRequestProperty("Proxy-Authorization", proxyEncodedPassword);
         }
-        
+
         return cnx;
     }
 
@@ -109,6 +114,8 @@ public final class WebBrowser {
     }
 
     private static void sendHeader(URLConnection cnx) {
+        populateBrowserProperties();
+        
         // send browser properties
         for (Map.Entry<String, String> browserProperty : browserProperties.entrySet()) {
             cnx.setRequestProperty(browserProperty.getKey(), browserProperty.getValue());
@@ -195,7 +202,7 @@ public final class WebBrowser {
         if (charset == null) {
             charset = Charset.defaultCharset();
         }
-        
+
         return charset;
     }
 
@@ -229,10 +236,10 @@ public final class WebBrowser {
 
     public static void setProxyPassword(String tvdbProxyPassword) {
         WebBrowser.proxyPassword = tvdbProxyPassword;
-        
+
         if (proxyUsername != null) {
-            proxyEncodedPassword = proxyUsername + ":" + tvdbProxyPassword;
-            proxyEncodedPassword = Base64.base64Encode(proxyEncodedPassword);
+            proxyEncodedPassword = proxyUsername + ":" + proxyPassword;
+            proxyEncodedPassword = "Basic " + new String(Base64.encodeBase64((proxyUsername + ":" + proxyPassword).getBytes()));
         }
     }
 

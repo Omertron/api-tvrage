@@ -1,38 +1,33 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.tools;
 
+import com.moviejukebox.tvrage.TVRage;
+import com.moviejukebox.tvrage.model.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.moviejukebox.tvrage.TVRage;
-import com.moviejukebox.tvrage.model.CountryDetail;
-import com.moviejukebox.tvrage.model.Episode;
-import com.moviejukebox.tvrage.model.EpisodeList;
-import com.moviejukebox.tvrage.model.EpisodeNumber;
-import com.moviejukebox.tvrage.model.ShowInfo;
-
 public class TVRageParser {
+
     private static final String LOG_MESSAGE = "TVRage Error: ";
-    private static Logger logger = TVRage.getLogger();
+    private static Logger logger = Logger.getLogger(TVRageParser.class);
 
     // Hide the constructor
     protected TVRageParser() {
@@ -41,27 +36,27 @@ public class TVRageParser {
     }
 
     public static Episode getEpisodeInfo(String searchUrl) {
-        Document doc = null;
+        Document doc;
         Episode episode = new Episode();
-        
+
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(LOG_MESSAGE + error.getMessage());
+            logger.warn(LOG_MESSAGE + error.getMessage());
             return episode;
         }
-        
+
         if (doc == null) {
             return episode;
         }
-        
+
         // The EpisodeInfo contains show information as well, but we will skip this
         NodeList nlEpisode = doc.getElementsByTagName("episode");
-        
+
         if (nlEpisode == null || nlEpisode.getLength() == 0) {
             return episode;
         }
-        
+
         // There's only one episode in the EpisodeInfo node
         Element eEpisode = (Element) nlEpisode.item(0);
         episode = parseEpisodeInfo(eEpisode);
@@ -70,28 +65,28 @@ public class TVRageParser {
 
     public static EpisodeList getEpisodeList(String searchUrl) {
         EpisodeList epList = new EpisodeList();
-        Document doc = null;
-        
+        Document doc;
+
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(LOG_MESSAGE + error.getMessage());
+            logger.warn(LOG_MESSAGE + error.getMessage());
             return epList;
         }
-        
+
         if (doc == null) {
             return epList;
         }
-        
+
         NodeList nlEpisodeList;
         Node nEpisodeList;
         Element eEpisodeList;
-        
+
         nlEpisodeList = doc.getElementsByTagName("Show");
         if (nlEpisodeList == null || nlEpisodeList.getLength() == 0) {
             return epList;
         }
-        
+
         // Get the show name and total seasons
         for (int loop = 0; loop < nlEpisodeList.getLength(); loop++) {
             nEpisodeList = nlEpisodeList.item(loop);
@@ -101,24 +96,24 @@ public class TVRageParser {
                 epList.setTotalSeasons(DOMHelper.getValueFromElement(eEpisodeList, "totalseasons"));
             }
         }
-        
+
         // Now process the individual seasons
         nlEpisodeList = doc.getElementsByTagName("Season");
         if (nlEpisodeList == null || nlEpisodeList.getLength() == 0) {
             return epList;
         }
-        
+
         for (int loop = 0; loop < nlEpisodeList.getLength(); loop++) {
             nEpisodeList = nlEpisodeList.item(loop);
             if (nEpisodeList.getNodeType() == Node.ELEMENT_NODE) {
                 eEpisodeList = (Element) nEpisodeList;
                 String season = eEpisodeList.getAttribute("no"); // Get the season number
-                
+
                 NodeList nlEpisode = eEpisodeList.getElementsByTagName("episode");
                 if (nlEpisode == null || nlEpisode.getLength() == 0) {
                     continue;
                 }
-                
+
                 for (int eLoop = 0; eLoop < nlEpisode.getLength(); eLoop++) {
                     Node nEpisode = nlEpisode.item(eLoop);
                     if (nEpisode.getNodeType() == Node.ELEMENT_NODE) {
@@ -128,32 +123,32 @@ public class TVRageParser {
                 }
             }
         }
-        
+
         return epList;
     }
 
     public static List<ShowInfo> getSearchShow(String searchUrl) {
         List<ShowInfo> showList = new ArrayList<ShowInfo>();
-        ShowInfo showInfo = null;
-        Document doc = null;
-        
+        ShowInfo showInfo;
+        Document doc;
+
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(LOG_MESSAGE + error.getMessage());
+            logger.warn(LOG_MESSAGE + error.getMessage());
             return showList;
         }
-        
+
         if (doc == null) {
             return showList;
         }
-        
+
         NodeList nlShowInfo = doc.getElementsByTagName("show");
-        
+
         if (nlShowInfo == null || nlShowInfo.getLength() == 0) {
             return showList;
         }
-        
+
         for (int loop = 0; loop < nlShowInfo.getLength(); loop++) {
             Node nShowInfo = nlShowInfo.item(loop);
             if (nShowInfo.getNodeType() == Node.ELEMENT_NODE) {
@@ -162,32 +157,32 @@ public class TVRageParser {
                 showList.add(showInfo);
             }
         }
-        
+
         return showList;
     }
 
     public static List<ShowInfo> getShowInfo(String searchUrl) {
         List<ShowInfo> showList = new ArrayList<ShowInfo>();
-        ShowInfo showInfo = null;
-        Document doc = null;
-        
+        ShowInfo showInfo;
+        Document doc;
+
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.severe(LOG_MESSAGE + error.getMessage());
+            logger.warn(LOG_MESSAGE + error.getMessage());
             return showList;
         }
-        
+
         if (doc == null) {
             return showList;
         }
-        
+
         NodeList nlShowInfo = doc.getElementsByTagName("Showinfo");
-        
+
         if (nlShowInfo == null || nlShowInfo.getLength() == 0) {
             return showList;
         }
-        
+
         for (int loop = 0; loop < nlShowInfo.getLength(); loop++) {
             Node nShowInfo = nlShowInfo.item(loop);
             if (nShowInfo.getNodeType() == Node.ELEMENT_NODE) {
@@ -196,7 +191,7 @@ public class TVRageParser {
                 showList.add(showInfo);
             }
         }
-        
+
         return showList;
     }
 
@@ -208,7 +203,7 @@ public class TVRageParser {
         en.setEpisode(DOMHelper.getValueFromElement(eEpisode, "seasonnum"));
         en.setAbsolute(DOMHelper.getValueFromElement(eEpisode, "epnum"));
         episode.setEpisodeNumber(en);
-        
+
         episode.setProductionId(DOMHelper.getValueFromElement(eEpisode, "prodnum"));
         episode.setAirDate(DOMHelper.getValueFromElement(eEpisode, "airdate"));
         episode.setLink(DOMHelper.getValueFromElement(eEpisode, "link"));
@@ -216,10 +211,10 @@ public class TVRageParser {
         episode.setSummary(DOMHelper.getValueFromElement(eEpisode, "summary"));
         episode.setRating(DOMHelper.getValueFromElement(eEpisode, "rating"));
         episode.setScreenCap(DOMHelper.getValueFromElement(eEpisode, "screencap"));
-        
+
         return episode;
     }
-    
+
     private static Episode parseEpisodeInfo(Element eEpisodeInfo) {
         Episode episode = new Episode();
 
@@ -227,7 +222,7 @@ public class TVRageParser {
         episode.setAirDate(DOMHelper.getValueFromElement(eEpisodeInfo, "airdate"));
         episode.setLink(DOMHelper.getValueFromElement(eEpisodeInfo, "url"));
         episode.setSummary(DOMHelper.getValueFromElement(eEpisodeInfo, "summary"));
-        
+
         // Process the season & episode field
         Pattern pattern = Pattern.compile("(\\d*)[x](\\d*)");
         Matcher matcher = pattern.matcher(DOMHelper.getValueFromElement(eEpisodeInfo, "number"));
@@ -237,31 +232,31 @@ public class TVRageParser {
             en.setEpisode(matcher.group(2));
             episode.setEpisodeNumber(en);
         }
-        
+
         return episode;
     }
 
     private static ShowInfo parseNextShowInfo(Element eShowInfo) {
         ShowInfo showInfo = new ShowInfo();
         String text;
-        
+
         // ShowID
         showInfo.setShowID(DOMHelper.getValueFromElement(eShowInfo, "showid"));
-        
+
         // ShowName
         text = DOMHelper.getValueFromElement(eShowInfo, "showname");
         if (!TVRage.isValidString(text)) {
             text = DOMHelper.getValueFromElement(eShowInfo, "name");
-        } 
+        }
         showInfo.setShowName(text);
-        
+
         // ShowLink
         text = DOMHelper.getValueFromElement(eShowInfo, "showlink");
         if (!TVRage.isValidString(text)) {
             text = DOMHelper.getValueFromElement(eShowInfo, "link");
         }
         showInfo.setShowLink(text);
-        
+
         // Country
         text = DOMHelper.getValueFromElement(eShowInfo, "country");
         if (!TVRage.isValidString(text)) {
@@ -274,13 +269,13 @@ public class TVRageParser {
 
         // StartDate
         showInfo.setStartDate(DOMHelper.getValueFromElement(eShowInfo, "startdate"));
-        
+
         // Ended
         showInfo.setEnded(DOMHelper.getValueFromElement(eShowInfo, "ended"));
-        
+
         // Seasons
         showInfo.setTotalSeasons(DOMHelper.getValueFromElement(eShowInfo, "seasons"));
-        
+
         // Status
         showInfo.setStatus(DOMHelper.getValueFromElement(eShowInfo, "status"));
 
@@ -289,16 +284,16 @@ public class TVRageParser {
 
         // Summary
         showInfo.setSummary(DOMHelper.getValueFromElement(eShowInfo, "summary"));
-        
+
         // Runtime
         showInfo.setRuntime(DOMHelper.getValueFromElement(eShowInfo, "runtime"));
-        
+
         // Air Time
         showInfo.setAirTime(DOMHelper.getValueFromElement(eShowInfo, "airtime"));
-        
+
         // Air Day
         showInfo.setAirDay(DOMHelper.getValueFromElement(eShowInfo, "airday"));
-        
+
         // Time Zone
         showInfo.setTimezone(DOMHelper.getValueFromElement(eShowInfo, "timezone"));
 
@@ -327,7 +322,7 @@ public class TVRageParser {
                 showInfo.addAka(newAka);
             }
         }
-        
+
         // Genres
         NodeList nlGenres = eShowInfo.getElementsByTagName("genre");
         for (int loop = 0; loop < nlGenres.getLength(); loop++) {
@@ -337,7 +332,7 @@ public class TVRageParser {
                 showInfo.addGenre(eGenre.getNodeValue());
             }
         }
-        
+
         return showInfo;
     }
 }
