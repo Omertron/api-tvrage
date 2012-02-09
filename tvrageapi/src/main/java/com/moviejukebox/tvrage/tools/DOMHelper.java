@@ -1,25 +1,23 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.tools;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -55,7 +53,7 @@ public class DOMHelper {
         } catch (NullPointerException error) {
             return "";
         }
-        
+
         return returnValue;
     }
 
@@ -72,10 +70,10 @@ public class DOMHelper {
         Document doc = null;
         InputStream in = null;
         String webPage = null;
-        
+
         try {
             webPage = WebBrowser.request(url);
-           
+
             in = new ByteArrayInputStream(webPage.getBytes("UTF-8"));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

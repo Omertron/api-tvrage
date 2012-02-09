@@ -1,27 +1,24 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.model;
 
+import com.moviejukebox.tvrage.TVRage;
 import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
 import static com.moviejukebox.tvrage.TVRage.isValidString;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.pojava.datetime.DateTime;
-
-import com.moviejukebox.tvrage.TVRage;
 
 /**
  * Full information about the show
@@ -49,7 +46,7 @@ public class ShowInfo {
     private String summary                 = UNKNOWN;
 	private String timezone                = UNKNOWN;
 	private int    totalSeasons            = 0;
-	
+
 	public boolean isValid() {
 	    if (showID > 0) {
 	        return true;
@@ -57,7 +54,7 @@ public class ShowInfo {
 	        return false;
 	    }
 	}
-	
+
 	/**
 	 * Add a single AKA to the list
 	 * @param newAka
@@ -67,7 +64,7 @@ public class ShowInfo {
 			this.akas.add(newAka);
 		}
 	}
-	
+
 	/**
 	 * Add single AKA from a country/aka pairing
 	 * @param country
@@ -77,10 +74,10 @@ public class ShowInfo {
 		if (!isValidString(country) || !isValidString(aka)) {
 			return;
 		}
-		
+
 		this.akas.add(new CountryDetail(country, aka));
 	}
-	
+
 	/**
 	 * Add a single Genre to the list
 	 * @param genre
@@ -90,7 +87,7 @@ public class ShowInfo {
 	        this.genres.add(genre);
 	    }
 	}
-	
+
 	/**
 	 * Add a single network to the list
 	 * @param newNetwork
@@ -100,8 +97,8 @@ public class ShowInfo {
 			this.network.add(newNetwork);
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Add a single network to the list
 	 * @param country
 	 * @param network
@@ -110,14 +107,14 @@ public class ShowInfo {
        if (!isValidString(country) || !isValidString(networkName)) {
             return;
         }
-        
+
         this.network.add(new CountryDetail(country, networkName));
 	}
-	
+
 	public String getAirDay() {
 		return airDay;
 	}
-	
+
 	public String getAirTime() {
 		return airTime;
 	}
@@ -129,67 +126,67 @@ public class ShowInfo {
 	public String getClassification() {
 		return classification;
 	}
-	
+
 	public String getCountry() {
 		return country;
 	}
-	
+
 	public String getEnded() {
 		return ended;
 	}
-	
+
     public List<String> getGenres() {
 		return genres;
 	}
-    
+
 	public List<CountryDetail> getNetwork() {
 		return network;
 	}
-	
+
 	public String getOriginCountry() {
 		return originCountry;
 	}
-	
+
 	public int getRuntime() {
 		return runtime;
 	}
-	
+
 	public int getShowID() {
 		return showID;
 	}
-	
+
 	public String getShowLink() {
 		return showLink;
 	}
-	
+
 	public String getShowName() {
 		return showName;
 	}
-	
+
 	public Date getStartDate() {
 		return startDate;
 	}
-	
+
 	public int getStarted() {
 		return started;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public String getSummary() {
 		return summary;
 	}
-	
+
 	public String getTimezone() {
 		return timezone;
 	}
-	
+
 	public int getTotalSeasons() {
 		return totalSeasons;
 	}
-	
+
 	public void setAirDay(String airDay) {
 	    if (isValidString(airDay)) {
 	        this.airDay = airDay;
@@ -197,7 +194,7 @@ public class ShowInfo {
 	        this.airDay = UNKNOWN;
 	    }
 	}
-	
+
 	public void setAirTime(String airTime) {
 	    if (isValidString(airTime)) {
 	        this.airTime = airTime;
@@ -205,11 +202,11 @@ public class ShowInfo {
 	        this.airTime = UNKNOWN;
 	    }
 	}
-	
+
 	public void setAkas(List<CountryDetail> akas) {
 		this.akas = akas;
 	}
-	
+
 	public void setClassification(String classification) {
 	    if (isValidString(classification)) {
 	        this.classification = classification;
@@ -217,7 +214,7 @@ public class ShowInfo {
 	        this.classification = UNKNOWN;
 	    }
 	}
-	
+
     public void setCountry(String country) {
         if (isValidString(country)) {
             this.country = country;
@@ -225,7 +222,7 @@ public class ShowInfo {
             this.country = UNKNOWN;
         }
 	}
-    
+
     public void setEnded(String ended) {
         if (isValidString(ended)) {
             this.ended = ended;
@@ -233,15 +230,15 @@ public class ShowInfo {
             this.ended = UNKNOWN;
         }
 	}
-    
+
 	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
-	
+
 	public void setNetwork(List<CountryDetail> network) {
 		this.network = network;
 	}
-	
+
 	public void setOriginCountry(String originCountry) {
         if (isValidString(originCountry)) {
             this.originCountry = originCountry;
@@ -249,23 +246,23 @@ public class ShowInfo {
             this.originCountry = UNKNOWN;
         }
 	}
-	
+
 	public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
-	
+
 	public void setRuntime(String runtime) {
         this.runtime = convertStrToInt(runtime);
     }
-	
+
 	public void setShowID(int showID) {
 		this.showID = showID;
 	}
-	
+
 	public void setShowID(String showID) {
         this.showID = convertStrToInt(showID);
 	}
-	
+
 	public void setShowLink(String showLink) {
         if (isValidString(showLink)) {
             this.showLink = showLink;
@@ -273,7 +270,7 @@ public class ShowInfo {
             this.showLink = UNKNOWN;
         }
 	}
-	
+
 	public void setShowName(String showName) {
         if (isValidString(showName)) {
             this.showName = showName;
@@ -281,11 +278,11 @@ public class ShowInfo {
             this.showName = UNKNOWN;
         }
 	}
-	
+
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	
+
 	public void setStartDate(String startDate) {
 	    if (isValidString(startDate)) {
 	        try {
@@ -296,15 +293,15 @@ public class ShowInfo {
 	        }
 	    }
     }
-	
+
 	public void setStarted(int started) {
         this.started = started;
     }
-	
+
 	public void setStarted(String started) {
         this.started = convertStrToInt(started);
     }
-	
+
 	public void setStatus(String status) {
         if (isValidString(status)) {
             this.status = status;
@@ -320,7 +317,7 @@ public class ShowInfo {
             this.summary = UNKNOWN;
         }
 	}
-	
+
 	public void setTimezone(String timezone) {
         if (isValidString(timezone)) {
             this.timezone = timezone;

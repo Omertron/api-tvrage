@@ -1,20 +1,19 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.model;
 
-import static com.moviejukebox.tvrage.TVRage.isValidString;
-
 import com.moviejukebox.tvrage.TVRage;
+import static com.moviejukebox.tvrage.TVRage.isValidString;
 
 /**
  * Class to hold country along with a generic detail string
@@ -25,21 +24,21 @@ public class CountryDetail {
     private static final String UNKNOWN = TVRage.UNKNOWN;
 	private String country;
 	private String detail;
-	
+
 	public CountryDetail() {
 	    this.country = UNKNOWN;
 	    this.detail = UNKNOWN;
 	}
-	
+
 	public CountryDetail(String country, String detail) {
         this.country = country;
         this.detail = detail;
 	}
-	
+
 	public String getCountry() {
 		return country;
 	}
-	
+
 	public void setCountry(String country) {
 	    if (isValidString(country)) {
 	        this.country = country.trim();
@@ -47,11 +46,11 @@ public class CountryDetail {
 	        this.country = UNKNOWN;
 	    }
 	}
-	
+
 	public String getDetail() {
 		return detail;
 	}
-	
+
 	public void setDetail(String detail) {
         if (isValidString(detail)) {
             this.detail = detail.trim();
@@ -59,7 +58,7 @@ public class CountryDetail {
             this.detail = UNKNOWN;
         }
 	}
-	
+
 	@Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -75,11 +74,11 @@ public class CountryDetail {
 	    if (!isValidString(country)) {
 	        return false;
 	    }
-	    
+
 	    if (!isValidString(detail)) {
 	        return false;
 	    }
-	    
+
 	    return true;
 	}
 }

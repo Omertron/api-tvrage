@@ -1,24 +1,21 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.model;
 
-import static com.moviejukebox.tvrage.TVRage.isValidString;
-
-import java.util.Date;
-
-import org.pojava.datetime.DateTime;
-
 import com.moviejukebox.tvrage.TVRage;
+import static com.moviejukebox.tvrage.TVRage.isValidString;
+import java.util.Date;
+import org.pojava.datetime.DateTime;
 
 public class Episode {
     private static final String UNKNOWN = TVRage.UNKNOWN;
@@ -30,15 +27,15 @@ public class Episode {
     private String summary      = UNKNOWN;
     private float  rating       = 0.0f;
     private String screenCap    = UNKNOWN;
-	
+
 	public void setEpisodeNumber(EpisodeNumber episodeNumber) {
 	    this.episodeNumber = episodeNumber;
 	}
-	
+
 	public EpisodeNumber getEpisodeNumber() {
 	    return episodeNumber;
 	}
-	
+
 	public boolean isValid() {
 	    if (episodeNumber.isValid()) {
 	        if (isValidString(title)) {
@@ -49,7 +46,7 @@ public class Episode {
 	    }
 	    return false;
 	}
-	
+
 	/**
 	 * Added as a convenience method
 	 * @return
@@ -57,7 +54,7 @@ public class Episode {
 	public int getEpisode() {
 	    return episodeNumber.getEpisode();
 	}
-	
+
     /**
      * Added as a convenience method
      * @return
@@ -65,11 +62,11 @@ public class Episode {
 	public int getSeason() {
 	    return episodeNumber.getSeason();
 	}
-	
+
 	public String getProductionId() {
 		return productionId;
 	}
-	
+
 	public void setProductionId(String productionId) {
         if (isValidString(productionId)) {
             this.productionId = productionId.trim();
@@ -77,15 +74,15 @@ public class Episode {
             this.productionId = UNKNOWN;
         }
 	}
-	
+
 	public Date getAirDate() {
 		return airDate;
 	}
-	
+
 	public void setAirDate(Date airDate) {
 		this.airDate = airDate;
 	}
-	
+
 	public void setAirDate(String airDate) {
 	    if (isValidString(airDate)) {
     	    try {
@@ -97,11 +94,11 @@ public class Episode {
 	        this.airDate = null;
 	    }
 	}
-	
+
 	public String getLink() {
 		return link;
 	}
-	
+
 	public void setLink(String link) {
         if (isValidString(link)) {
             this.link = link.trim();
@@ -109,11 +106,11 @@ public class Episode {
             this.link = UNKNOWN;
         }
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
         if (isValidString(title)) {
             this.title = title.trim();
@@ -121,11 +118,11 @@ public class Episode {
             this.title = UNKNOWN;
         }
 	}
-	
+
 	public String getSummary() {
 		return summary;
 	}
-	
+
 	public void setSummary(String summary) {
         if (isValidString(summary)) {
             this.summary = summary.trim();
@@ -133,15 +130,15 @@ public class Episode {
             this.summary = UNKNOWN;
         }
 	}
-	
+
 	public float getRating() {
 		return rating;
 	}
-	
+
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	
+
 	public void setRating(String rating) {
 	    try {
 	        this.rating = Float.parseFloat(rating);
@@ -149,7 +146,7 @@ public class Episode {
 	        this.rating = 0.0f;
 	    }
 	}
-	
+
 	@Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -172,7 +169,7 @@ public class Episode {
         builder.append("]]");
         return builder.toString();
     }
-	
+
     public String getScreenCap() {
         return screenCap;
     }
