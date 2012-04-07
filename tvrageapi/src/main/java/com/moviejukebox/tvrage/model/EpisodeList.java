@@ -20,12 +20,13 @@ import java.util.TreeMap;
 
 /**
  * A list of episode in a HashMap format for easy searching and retrieval
+ *
  * @author stuart.boston
  *
  */
 public class EpisodeList {
-    private static final String UNKNOWN = TVRage.UNKNOWN;
 
+    private static final String UNKNOWN = TVRage.UNKNOWN;
     private String showName;
     private int totalSeasons;
     private Map<EpisodeNumber, Episode> episodeList;
@@ -39,9 +40,8 @@ public class EpisodeList {
     public boolean isValid() {
         if (isValidString(showName) && !episodeList.isEmpty()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public Map<EpisodeNumber, Episode> getEpisodeList() {

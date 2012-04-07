@@ -22,198 +22,204 @@ import org.pojava.datetime.DateTime;
 
 /**
  * Full information about the show
+ *
  * @author Stuart.Boston
  *
  */
 public class ShowInfo {
-    private static final String UNKNOWN    = TVRage.UNKNOWN;
-	private String airDay                  = UNKNOWN;
-	private String airTime                 = UNKNOWN;
-	private List<CountryDetail> akas       = new ArrayList<CountryDetail>();
-	private String classification          = UNKNOWN;
-	private String country                 = UNKNOWN;
-	private String ended                   = UNKNOWN;
-	private List<String>        genres     = new ArrayList<String>();
-	private List<CountryDetail> network    = new ArrayList<CountryDetail>();
-	private String originCountry           = UNKNOWN;
-	private int    runtime                 = 0;
-	private int    showID                  = 0;
-	private String showLink                = UNKNOWN;
-	private String showName                = UNKNOWN;
-	private Date   startDate               = null;
-	private int    started                 = 0;
-    private String status                  = UNKNOWN;
-    private String summary                 = UNKNOWN;
-	private String timezone                = UNKNOWN;
-	private int    totalSeasons            = 0;
 
-	public boolean isValid() {
-	    if (showID > 0) {
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
+    private static final String UNKNOWN = TVRage.UNKNOWN;
+    private String airDay = UNKNOWN;
+    private String airTime = UNKNOWN;
+    private List<CountryDetail> akas = new ArrayList<CountryDetail>();
+    private String classification = UNKNOWN;
+    private String country = UNKNOWN;
+    private String ended = UNKNOWN;
+    private List<String> genres = new ArrayList<String>();
+    private List<CountryDetail> network = new ArrayList<CountryDetail>();
+    private String originCountry = UNKNOWN;
+    private int runtime = 0;
+    private int showID = 0;
+    private String showLink = UNKNOWN;
+    private String showName = UNKNOWN;
+    private Date startDate = null;
+    private int started = 0;
+    private String status = UNKNOWN;
+    private String summary = UNKNOWN;
+    private String timezone = UNKNOWN;
+    private int totalSeasons = 0;
 
-	/**
-	 * Add a single AKA to the list
-	 * @param newAka
-	 */
-	public void addAka(CountryDetail newAka) {
-		if (newAka.isValid()) {
-			this.akas.add(newAka);
-		}
-	}
+    public boolean isValid() {
+        if (showID > 0) {
+            return true;
+        }
+        return false;
+    }
 
-	/**
-	 * Add single AKA from a country/aka pairing
-	 * @param country
-	 * @param aka
-	 */
-	public void addAka(String country, String aka) {
-		if (!isValidString(country) || !isValidString(aka)) {
-			return;
-		}
+    /**
+     * Add a single AKA to the list
+     *
+     * @param newAka
+     */
+    public void addAka(CountryDetail newAka) {
+        if (newAka.isValid()) {
+            this.akas.add(newAka);
+        }
+    }
 
-		this.akas.add(new CountryDetail(country, aka));
-	}
+    /**
+     * Add single AKA from a country/aka pairing
+     *
+     * @param country
+     * @param aka
+     */
+    public void addAka(String country, String aka) {
+        if (!isValidString(country) || !isValidString(aka)) {
+            return;
+        }
 
-	/**
-	 * Add a single Genre to the list
-	 * @param genre
-	 */
-	public void addGenre(String genre) {
-	    if (isValidString(genre)) {
-	        this.genres.add(genre);
-	    }
-	}
+        this.akas.add(new CountryDetail(country, aka));
+    }
 
-	/**
-	 * Add a single network to the list
-	 * @param newNetwork
-	 */
-	public void addNetwork(CountryDetail newNetwork) {
-		if (newNetwork.isValid()) {
-			this.network.add(newNetwork);
-		}
-	}
+    /**
+     * Add a single Genre to the list
+     *
+     * @param genre
+     */
+    public void addGenre(String genre) {
+        if (isValidString(genre)) {
+            this.genres.add(genre);
+        }
+    }
 
-	/**
-	 * Add a single network to the list
-	 * @param country
-	 * @param network
-	 */
-	public void addNetwork(String country, String networkName) {
-       if (!isValidString(country) || !isValidString(networkName)) {
+    /**
+     * Add a single network to the list
+     *
+     * @param newNetwork
+     */
+    public void addNetwork(CountryDetail newNetwork) {
+        if (newNetwork.isValid()) {
+            this.network.add(newNetwork);
+        }
+    }
+
+    /**
+     * Add a single network to the list
+     *
+     * @param country
+     * @param network
+     */
+    public void addNetwork(String country, String networkName) {
+        if (!isValidString(country) || !isValidString(networkName)) {
             return;
         }
 
         this.network.add(new CountryDetail(country, networkName));
-	}
+    }
 
-	public String getAirDay() {
-		return airDay;
-	}
+    public String getAirDay() {
+        return airDay;
+    }
 
-	public String getAirTime() {
-		return airTime;
-	}
+    public String getAirTime() {
+        return airTime;
+    }
 
-	public List<CountryDetail> getAkas() {
-		return akas;
-	}
+    public List<CountryDetail> getAkas() {
+        return akas;
+    }
 
-	public String getClassification() {
-		return classification;
-	}
+    public String getClassification() {
+        return classification;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public String getEnded() {
-		return ended;
-	}
+    public String getEnded() {
+        return ended;
+    }
 
     public List<String> getGenres() {
-		return genres;
-	}
+        return genres;
+    }
 
-	public List<CountryDetail> getNetwork() {
-		return network;
-	}
+    public List<CountryDetail> getNetwork() {
+        return network;
+    }
 
-	public String getOriginCountry() {
-		return originCountry;
-	}
+    public String getOriginCountry() {
+        return originCountry;
+    }
 
-	public int getRuntime() {
-		return runtime;
-	}
+    public int getRuntime() {
+        return runtime;
+    }
 
-	public int getShowID() {
-		return showID;
-	}
+    public int getShowID() {
+        return showID;
+    }
 
-	public String getShowLink() {
-		return showLink;
-	}
+    public String getShowLink() {
+        return showLink;
+    }
 
-	public String getShowName() {
-		return showName;
-	}
+    public String getShowName() {
+        return showName;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public Date getStartDate() {
+        return (Date) startDate.clone();
+    }
 
-	public int getStarted() {
-		return started;
-	}
+    public int getStarted() {
+        return started;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public String getSummary() {
-		return summary;
-	}
+    public String getSummary() {
+        return summary;
+    }
 
-	public String getTimezone() {
-		return timezone;
-	}
+    public String getTimezone() {
+        return timezone;
+    }
 
-	public int getTotalSeasons() {
-		return totalSeasons;
-	}
+    public int getTotalSeasons() {
+        return totalSeasons;
+    }
 
-	public void setAirDay(String airDay) {
-	    if (isValidString(airDay)) {
-	        this.airDay = airDay;
-	    } else {
-	        this.airDay = UNKNOWN;
-	    }
-	}
+    public void setAirDay(String airDay) {
+        if (isValidString(airDay)) {
+            this.airDay = airDay;
+        } else {
+            this.airDay = UNKNOWN;
+        }
+    }
 
-	public void setAirTime(String airTime) {
-	    if (isValidString(airTime)) {
-	        this.airTime = airTime;
-	    } else {
-	        this.airTime = UNKNOWN;
-	    }
-	}
+    public void setAirTime(String airTime) {
+        if (isValidString(airTime)) {
+            this.airTime = airTime;
+        } else {
+            this.airTime = UNKNOWN;
+        }
+    }
 
-	public void setAkas(List<CountryDetail> akas) {
-		this.akas = akas;
-	}
+    public void setAkas(List<CountryDetail> akas) {
+        this.akas = akas;
+    }
 
-	public void setClassification(String classification) {
-	    if (isValidString(classification)) {
-	        this.classification = classification;
-	    } else {
-	        this.classification = UNKNOWN;
-	    }
-	}
+    public void setClassification(String classification) {
+        if (isValidString(classification)) {
+            this.classification = classification;
+        } else {
+            this.classification = UNKNOWN;
+        }
+    }
 
     public void setCountry(String country) {
         if (isValidString(country)) {
@@ -221,7 +227,7 @@ public class ShowInfo {
         } else {
             this.country = UNKNOWN;
         }
-	}
+    }
 
     public void setEnded(String ended) {
         if (isValidString(ended)) {
@@ -229,110 +235,110 @@ public class ShowInfo {
         } else {
             this.ended = UNKNOWN;
         }
-	}
+    }
 
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
-	}
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
 
-	public void setNetwork(List<CountryDetail> network) {
-		this.network = network;
-	}
+    public void setNetwork(List<CountryDetail> network) {
+        this.network = network;
+    }
 
-	public void setOriginCountry(String originCountry) {
+    public void setOriginCountry(String originCountry) {
         if (isValidString(originCountry)) {
             this.originCountry = originCountry;
         } else {
             this.originCountry = UNKNOWN;
         }
-	}
+    }
 
-	public void setRuntime(int runtime) {
+    public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
 
-	public void setRuntime(String runtime) {
+    public void setRuntime(String runtime) {
         this.runtime = convertStrToInt(runtime);
     }
 
-	public void setShowID(int showID) {
-		this.showID = showID;
-	}
+    public void setShowID(int showID) {
+        this.showID = showID;
+    }
 
-	public void setShowID(String showID) {
+    public void setShowID(String showID) {
         this.showID = convertStrToInt(showID);
-	}
+    }
 
-	public void setShowLink(String showLink) {
+    public void setShowLink(String showLink) {
         if (isValidString(showLink)) {
             this.showLink = showLink;
         } else {
             this.showLink = UNKNOWN;
         }
-	}
+    }
 
-	public void setShowName(String showName) {
+    public void setShowName(String showName) {
         if (isValidString(showName)) {
             this.showName = showName;
         } else {
             this.showName = UNKNOWN;
         }
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public void setStartDate(String startDate) {
-	    if (isValidString(startDate)) {
-	        try {
-	            this.startDate = (new DateTime(startDate)).toDate();
-	        } catch (Exception ignore) {
-	            // We can't do anything about this error, so return
-	            this.startDate = null;
-	        }
-	    }
     }
 
-	public void setStarted(int started) {
+    public void setStartDate(Date startDate) {
+        this.startDate = (Date) startDate.clone();
+    }
+
+    public void setStartDate(String startDate) {
+        if (isValidString(startDate)) {
+            try {
+                this.startDate = (new DateTime(startDate)).toDate();
+            } catch (Exception ignore) {
+                // We can't do anything about this error, so return
+                this.startDate = null;
+            }
+        }
+    }
+
+    public void setStarted(int started) {
         this.started = started;
     }
 
-	public void setStarted(String started) {
+    public void setStarted(String started) {
         this.started = convertStrToInt(started);
     }
 
-	public void setStatus(String status) {
+    public void setStatus(String status) {
         if (isValidString(status)) {
             this.status = status;
         } else {
             this.status = UNKNOWN;
         }
-	}
+    }
 
-	public void setSummary(String summary) {
+    public void setSummary(String summary) {
         if (isValidString(summary)) {
             this.summary = summary;
         } else {
             this.summary = UNKNOWN;
         }
-	}
+    }
 
-	public void setTimezone(String timezone) {
+    public void setTimezone(String timezone) {
         if (isValidString(timezone)) {
             this.timezone = timezone;
         } else {
             this.timezone = UNKNOWN;
         }
-	}
+    }
 
-	public void setTotalSeasons(int totalSeasons) {
-		this.totalSeasons = totalSeasons;
-	}
+    public void setTotalSeasons(int totalSeasons) {
+        this.totalSeasons = totalSeasons;
+    }
 
-	public void setTotalSeasons(String totalSeasons) {
-	    this.totalSeasons = convertStrToInt(totalSeasons);
-	}
+    public void setTotalSeasons(String totalSeasons) {
+        this.totalSeasons = convertStrToInt(totalSeasons);
+    }
 
     @Override
     public String toString() {
@@ -378,5 +384,4 @@ public class ShowInfo {
         builder.append("]]");
         return builder.toString();
     }
-
 }

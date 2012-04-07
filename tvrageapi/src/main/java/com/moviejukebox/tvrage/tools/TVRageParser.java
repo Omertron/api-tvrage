@@ -46,10 +46,6 @@ public class TVRageParser {
             return episode;
         }
 
-        if (doc == null) {
-            return episode;
-        }
-
         // The EpisodeInfo contains show information as well, but we will skip this
         NodeList nlEpisode = doc.getElementsByTagName("episode");
 
@@ -71,10 +67,6 @@ public class TVRageParser {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
             logger.warn(LOG_MESSAGE + error.getMessage());
-            return epList;
-        }
-
-        if (doc == null) {
             return epList;
         }
 
@@ -139,10 +131,6 @@ public class TVRageParser {
             return showList;
         }
 
-        if (doc == null) {
-            return showList;
-        }
-
         NodeList nlShowInfo = doc.getElementsByTagName("show");
 
         if (nlShowInfo == null || nlShowInfo.getLength() == 0) {
@@ -170,10 +158,6 @@ public class TVRageParser {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
             logger.warn(LOG_MESSAGE + error.getMessage());
-            return showList;
-        }
-
-        if (doc == null) {
             return showList;
         }
 
