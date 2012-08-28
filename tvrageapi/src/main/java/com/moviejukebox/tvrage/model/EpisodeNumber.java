@@ -1,21 +1,29 @@
 /*
  *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list 
- *  
+ *      http://code.google.com/p/moviejukebox/people/list
+ *
  *      Web: http://code.google.com/p/moviejukebox/
- *  
+ *
  *      This software is licensed under a Creative Commons License
  *      See this page: http://code.google.com/p/moviejukebox/wiki/License
- *  
- *      For any reuse or distribution, you must make clear to others the 
- *      license terms of this work.  
+ *
+ *      For any reuse or distribution, you must make clear to others the
+ *      license terms of this work.
  */
 package com.moviejukebox.tvrage.model;
 
 import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
+import java.io.Serializable;
 
-public class EpisodeNumber implements Comparable<EpisodeNumber> {
+public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
 
+    /*
+     * Serial Version
+     */
+    private static final long serialVersionUID = 1L;
+    /*
+     * Properties
+     */
     private static final int FACTOR = 1000;
     private int absolute;   // The absolute episode number across all seasons
     private int episode;    // The episode number within the season

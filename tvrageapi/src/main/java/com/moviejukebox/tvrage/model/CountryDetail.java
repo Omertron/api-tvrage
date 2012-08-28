@@ -14,52 +14,61 @@ package com.moviejukebox.tvrage.model;
 
 import com.moviejukebox.tvrage.TVRage;
 import static com.moviejukebox.tvrage.TVRage.isValidString;
+import java.io.Serializable;
 
 /**
  * Class to hold country along with a generic detail string
+ *
  * @author Stuart.Boston
  *
  */
-public class CountryDetail {
-    private static final String UNKNOWN = TVRage.UNKNOWN;
-	private String country;
-	private String detail;
+public class CountryDetail implements Serializable {
 
-	public CountryDetail() {
-	    this.country = UNKNOWN;
-	    this.detail = UNKNOWN;
-	}
+    /*
+     * Serial Version
+     */
+    private static final long serialVersionUID = 1L;
+    /*
+     * Properties
+     */
+    private String country;
+    private String detail;
 
-	public CountryDetail(String country, String detail) {
+    public CountryDetail() {
+        this.country = TVRage.UNKNOWN;
+        this.detail = TVRage.UNKNOWN;
+    }
+
+    public CountryDetail(String country, String detail) {
         this.country = country;
         this.detail = detail;
-	}
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setCountry(String country) {
-	    if (isValidString(country)) {
-	        this.country = country.trim();
-	    } else {
-	        this.country = UNKNOWN;
-	    }
-	}
+    public void setCountry(String country) {
+        if (isValidString(country)) {
+            this.country = country.trim();
+        } else {
+            this.country = TVRage.UNKNOWN;
+        }
+    }
 
-	public String getDetail() {
-		return detail;
-	}
+    public String getDetail() {
+        return detail;
+    }
 
-	public void setDetail(String detail) {
+    public void setDetail(String detail) {
         if (isValidString(detail)) {
             this.detail = detail.trim();
         } else {
-            this.detail = UNKNOWN;
+            this.detail = TVRage.UNKNOWN;
         }
-	}
+    }
 
-	@Override
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[CountryDetail=[country=");
@@ -70,15 +79,15 @@ public class CountryDetail {
         return builder.toString();
     }
 
-	public boolean isValid() {
-	    if (!isValidString(country)) {
-	        return false;
-	    }
+    public boolean isValid() {
+        if (!isValidString(country)) {
+            return false;
+        }
 
-	    if (!isValidString(detail)) {
-	        return false;
-	    }
+        if (!isValidString(detail)) {
+            return false;
+        }
 
-	    return true;
-	}
+        return true;
+    }
 }

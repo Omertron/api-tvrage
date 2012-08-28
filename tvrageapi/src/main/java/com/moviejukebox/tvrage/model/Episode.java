@@ -14,11 +14,19 @@ package com.moviejukebox.tvrage.model;
 
 import com.moviejukebox.tvrage.TVRage;
 import static com.moviejukebox.tvrage.TVRage.isValidString;
+import java.io.Serializable;
 import java.util.Date;
 import org.pojava.datetime.DateTime;
 
-public class Episode {
+public class Episode implements Serializable {
 
+    /*
+     * Serial Version
+     */
+    private static final long serialVersionUID = 1L;
+    /*
+     * Properties
+     */
     private static final String UNKNOWN = TVRage.UNKNOWN;
     private EpisodeNumber episodeNumber = new EpisodeNumber(0, 0);
     private String productionId = UNKNOWN;

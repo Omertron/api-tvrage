@@ -15,6 +15,7 @@ package com.moviejukebox.tvrage.model;
 import com.moviejukebox.tvrage.TVRage;
 import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
 import static com.moviejukebox.tvrage.TVRage.isValidString;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,15 +25,21 @@ import java.util.TreeMap;
  * @author stuart.boston
  *
  */
-public class EpisodeList {
+public class EpisodeList implements Serializable {
 
-    private static final String UNKNOWN = TVRage.UNKNOWN;
+    /*
+     * Serial Version
+     */
+    private static final long serialVersionUID = 1L;
+    /*
+     * Properties
+     */
     private String showName;
     private int totalSeasons;
     private Map<EpisodeNumber, Episode> episodeList;
 
     public EpisodeList() {
-        showName = UNKNOWN;
+        showName = TVRage.UNKNOWN;
         totalSeasons = 0;
         episodeList = new TreeMap<EpisodeNumber, Episode>();
     }
@@ -80,7 +87,7 @@ public class EpisodeList {
         if (isValidString(showName)) {
             this.showName = showName.trim();
         } else {
-            this.showName = UNKNOWN;
+            this.showName = TVRage.UNKNOWN;
         }
     }
 

@@ -15,6 +15,7 @@ package com.moviejukebox.tvrage.model;
 import com.moviejukebox.tvrage.TVRage;
 import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
 import static com.moviejukebox.tvrage.TVRage.isValidString;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,27 +27,33 @@ import org.pojava.datetime.DateTime;
  * @author Stuart.Boston
  *
  */
-public class ShowInfo {
+public class ShowInfo implements Serializable {
 
-    private static final String UNKNOWN = TVRage.UNKNOWN;
-    private String airDay = UNKNOWN;
-    private String airTime = UNKNOWN;
+    /*
+     * Serial Version
+     */
+    private static final long serialVersionUID = 1L;
+    /*
+     * Properties
+     */
+    private String airDay = TVRage.UNKNOWN;
+    private String airTime = TVRage.UNKNOWN;
     private List<CountryDetail> akas = new ArrayList<CountryDetail>();
-    private String classification = UNKNOWN;
-    private String country = UNKNOWN;
-    private String ended = UNKNOWN;
+    private String classification = TVRage.UNKNOWN;
+    private String country = TVRage.UNKNOWN;
+    private String ended = TVRage.UNKNOWN;
     private List<String> genres = new ArrayList<String>();
     private List<CountryDetail> network = new ArrayList<CountryDetail>();
-    private String originCountry = UNKNOWN;
+    private String originCountry = TVRage.UNKNOWN;
     private int runtime = 0;
     private int showID = 0;
-    private String showLink = UNKNOWN;
-    private String showName = UNKNOWN;
+    private String showLink = TVRage.UNKNOWN;
+    private String showName = TVRage.UNKNOWN;
     private Date startDate = null;
     private int started = 0;
-    private String status = UNKNOWN;
-    private String summary = UNKNOWN;
-    private String timezone = UNKNOWN;
+    private String status = TVRage.UNKNOWN;
+    private String summary = TVRage.UNKNOWN;
+    private String timezone = TVRage.UNKNOWN;
     private int totalSeasons = 0;
 
     public boolean isValid() {
@@ -197,7 +204,7 @@ public class ShowInfo {
         if (isValidString(airDay)) {
             this.airDay = airDay;
         } else {
-            this.airDay = UNKNOWN;
+            this.airDay = TVRage.UNKNOWN;
         }
     }
 
@@ -205,7 +212,7 @@ public class ShowInfo {
         if (isValidString(airTime)) {
             this.airTime = airTime;
         } else {
-            this.airTime = UNKNOWN;
+            this.airTime = TVRage.UNKNOWN;
         }
     }
 
@@ -217,7 +224,7 @@ public class ShowInfo {
         if (isValidString(classification)) {
             this.classification = classification;
         } else {
-            this.classification = UNKNOWN;
+            this.classification = TVRage.UNKNOWN;
         }
     }
 
@@ -225,7 +232,7 @@ public class ShowInfo {
         if (isValidString(country)) {
             this.country = country;
         } else {
-            this.country = UNKNOWN;
+            this.country = TVRage.UNKNOWN;
         }
     }
 
@@ -233,7 +240,7 @@ public class ShowInfo {
         if (isValidString(ended)) {
             this.ended = ended;
         } else {
-            this.ended = UNKNOWN;
+            this.ended = TVRage.UNKNOWN;
         }
     }
 
@@ -249,7 +256,7 @@ public class ShowInfo {
         if (isValidString(originCountry)) {
             this.originCountry = originCountry;
         } else {
-            this.originCountry = UNKNOWN;
+            this.originCountry = TVRage.UNKNOWN;
         }
     }
 
@@ -273,7 +280,7 @@ public class ShowInfo {
         if (isValidString(showLink)) {
             this.showLink = showLink;
         } else {
-            this.showLink = UNKNOWN;
+            this.showLink = TVRage.UNKNOWN;
         }
     }
 
@@ -281,7 +288,7 @@ public class ShowInfo {
         if (isValidString(showName)) {
             this.showName = showName;
         } else {
-            this.showName = UNKNOWN;
+            this.showName = TVRage.UNKNOWN;
         }
     }
 
@@ -312,7 +319,7 @@ public class ShowInfo {
         if (isValidString(status)) {
             this.status = status;
         } else {
-            this.status = UNKNOWN;
+            this.status = TVRage.UNKNOWN;
         }
     }
 
@@ -320,7 +327,7 @@ public class ShowInfo {
         if (isValidString(summary)) {
             this.summary = summary;
         } else {
-            this.summary = UNKNOWN;
+            this.summary = TVRage.UNKNOWN;
         }
     }
 
@@ -328,7 +335,7 @@ public class ShowInfo {
         if (isValidString(timezone)) {
             this.timezone = timezone;
         } else {
-            this.timezone = UNKNOWN;
+            this.timezone = TVRage.UNKNOWN;
         }
     }
 
