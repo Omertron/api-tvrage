@@ -1,11 +1,8 @@
 /*
- *      Copyright (c) 2004-2012 YAMJ Members
- *      http://code.google.com/p/moviejukebox/people/list
- *
- *      Web: http://code.google.com/p/moviejukebox/
+ *      Copyright (c) 2004-2012 Stuart Boston
  *
  *      This software is licensed under a Creative Commons License
- *      See this page: http://code.google.com/p/moviejukebox/wiki/License
+ *      See the LICENCE.txt file included in this package
  *
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
@@ -30,7 +27,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class TVRage {
-    
+
     private String apiKey = null;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
