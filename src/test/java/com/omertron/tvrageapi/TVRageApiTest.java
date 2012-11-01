@@ -9,7 +9,6 @@
  */
 package com.omertron.tvrageapi;
 
-import com.omertron.tvrageapi.TVRageApi;
 import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.ShowInfo;
@@ -21,7 +20,7 @@ import org.junit.Test;
 
 public class TVRageApiTest {
 
-    private static String apikey = "";
+    private static String apikey = "1tyJ0xqGoNMyZTaD1AY7";
     private TVRageApi tvr;
     private static final String SHOW_ID_STR = "15614";
     private static final int    SHOW_ID_INT = 15614;
