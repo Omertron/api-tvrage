@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -11,14 +11,16 @@
         <maven>3.0.3</maven>
     </prerequisites>
 
-    <groupId>com.moviejukebox</groupId>
+    <groupId>com.omertron</groupId>
     <artifactId>tvrageapi</artifactId>
     <version>1.4-SNAPSHOT</version>
-    <name>API-TV Rage</name>
+    <name>API-TVRage</name>
+    <packaging>jar</packaging>
+    <description>API for the TVRage.com website</description>
 
     <issueManagement>
-        <system>Google Code</system>
-        <url>http://code.google.com/p/javatvrageapi/issues/list</url>
+        <system>GitHub</system>
+        <url>https://github.com/Omertron/api-tvrage/issues</url>
     </issueManagement>
 
     <ciManagement>
@@ -27,13 +29,14 @@
     </ciManagement>
 
     <scm>
-        <connection>scm:svn:http://javatvrageapi.googlecode.com/svn/trunk/tvrageapi</connection>
-        <developerConnection>scm:svn:https://javatvrageapi.googlecode.com/svn/trunk/tvrageapi</developerConnection>
-        <url>http://code.google.com/p/javatvrageapi/source/browse/trunk/tvrageapi</url>
+        <url>scm:git:git@github.com:Omertron/api-tvrage.git</url>
+        <connection>scm:git:git@github.com:Omertron/api-tvrage.git</connection>
+        <developerConnection>scm:git:git@github.com:Omertron/api-tvrage.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
-        <skipTests>true</skipTests>
+        <skipTests>false</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <distribution.format>zip</distribution.format>

@@ -7,10 +7,10 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.model;
+package com.omertron.tvrageapi.model;
 
-import com.moviejukebox.tvrage.TVRage;
-import static com.moviejukebox.tvrage.TVRage.isValidString;
+import com.omertron.tvrageapi.TVRageApi;
+import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 
 /**
@@ -32,8 +32,8 @@ public class CountryDetail implements Serializable {
     private String detail;
 
     public CountryDetail() {
-        this.country = TVRage.UNKNOWN;
-        this.detail = TVRage.UNKNOWN;
+        this.country = TVRageApi.UNKNOWN;
+        this.detail = TVRageApi.UNKNOWN;
     }
 
     public CountryDetail(String country, String detail) {
@@ -49,7 +49,7 @@ public class CountryDetail implements Serializable {
         if (isValidString(country)) {
             this.country = country.trim();
         } else {
-            this.country = TVRage.UNKNOWN;
+            this.country = TVRageApi.UNKNOWN;
         }
     }
 
@@ -61,7 +61,7 @@ public class CountryDetail implements Serializable {
         if (isValidString(detail)) {
             this.detail = detail.trim();
         } else {
-            this.detail = TVRage.UNKNOWN;
+            this.detail = TVRageApi.UNKNOWN;
         }
     }
 

@@ -7,28 +7,29 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage;
+package com.omertron.tvrageapi;
 
-import com.moviejukebox.tvrage.model.Episode;
-import com.moviejukebox.tvrage.model.EpisodeList;
-import com.moviejukebox.tvrage.model.ShowInfo;
+import com.omertron.tvrageapi.TVRageApi;
+import com.omertron.tvrageapi.model.Episode;
+import com.omertron.tvrageapi.model.EpisodeList;
+import com.omertron.tvrageapi.model.ShowInfo;
 import java.util.List;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TVRageTest {
+public class TVRageApiTest {
 
     private static String apikey = "";
-    private TVRage tvr;
+    private TVRageApi tvr;
     private static final String SHOW_ID_STR = "15614";
     private static final int    SHOW_ID_INT = 15614;
     private static final String SHOW_NAME   = "Chuck";
 
     @Before
     public void setUp() throws Exception {
-        tvr = new TVRage(apikey);
+        tvr = new TVRageApi(apikey);
     }
 
     @Test
@@ -40,20 +41,20 @@ public class TVRageTest {
     @Test
     public void testGetEpisodeList() {
         EpisodeList episodeList = tvr.getEpisodeList(SHOW_ID_STR);
-        assertFalse(episodeList.getShowName().equals(TVRage.UNKNOWN));
+        assertFalse(episodeList.getShowName().equals(TVRageApi.UNKNOWN));
         assertFalse(episodeList.getEpisodeList().isEmpty());
     }
 
     @Test
     public void testGetShowInfoInt() {
         ShowInfo showInfo = tvr.getShowInfo(SHOW_ID_INT);
-        assertFalse(showInfo.getShowName().equals(TVRage.UNKNOWN));
+        assertFalse(showInfo.getShowName().equals(TVRageApi.UNKNOWN));
     }
 
     @Test
     public void testGetShowInfoString() {
         ShowInfo showInfo = tvr.getShowInfo(SHOW_ID_STR);
-        assertFalse(showInfo.getShowName().equals(TVRage.UNKNOWN));
+        assertFalse(showInfo.getShowName().equals(TVRageApi.UNKNOWN));
     }
 
     @Test

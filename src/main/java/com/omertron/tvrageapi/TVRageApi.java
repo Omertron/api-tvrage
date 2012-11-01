@@ -7,14 +7,14 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage;
+package com.omertron.tvrageapi;
 
-import com.moviejukebox.tvrage.model.Episode;
-import com.moviejukebox.tvrage.model.EpisodeList;
-import com.moviejukebox.tvrage.model.ShowInfo;
-import com.moviejukebox.tvrage.tools.FilteringLayout;
-import com.moviejukebox.tvrage.tools.TVRageParser;
-import com.moviejukebox.tvrage.tools.WebBrowser;
+import com.omertron.tvrageapi.model.Episode;
+import com.omertron.tvrageapi.model.EpisodeList;
+import com.omertron.tvrageapi.model.ShowInfo;
+import com.omertron.tvrageapi.tools.FilteringLayout;
+import com.omertron.tvrageapi.tools.TVRageParser;
+import com.omertron.tvrageapi.tools.WebBrowser;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ import org.apache.log4j.Logger;
  * @author Stuart.Boston
  *
  */
-public class TVRage {
+public class TVRageApi {
 
     private String apiKey = null;
     public static final String UNKNOWN = "UNKNOWN";
@@ -35,14 +35,14 @@ public class TVRage {
     private static final String API_SEARCH = "search.php";
     private static final String API_SHOWINFO = "showinfo.php";
     private static final String API_SITE = "http://services.tvrage.com/myfeeds/";
-    private static final Logger LOGGER = Logger.getLogger(TVRage.class);
+    private static final Logger LOGGER = Logger.getLogger(TVRageApi.class);
 
     /**
      * Constructor, requires the API Key
      *
      * @param apiKey
      */
-    public TVRage(String apiKey) {
+    public TVRageApi(String apiKey) {
         if (StringUtils.isBlank(apiKey)) {
             throw new UnsupportedOperationException("No API Key provided!");
         }
@@ -56,11 +56,11 @@ public class TVRage {
      * Output the API version information to the debug log
      */
     public static void showVersion() {
-        String apiTitle = TVRage.class.getPackage().getSpecificationTitle();
+        String apiTitle = TVRageApi.class.getPackage().getSpecificationTitle();
 
         if (StringUtils.isNotBlank(apiTitle)) {
-            String apiVersion = TVRage.class.getPackage().getSpecificationVersion();
-            String apiRevision = TVRage.class.getPackage().getImplementationVersion();
+            String apiVersion = TVRageApi.class.getPackage().getSpecificationVersion();
+            String apiRevision = TVRageApi.class.getPackage().getImplementationVersion();
             StringBuilder sv = new StringBuilder();
             sv.append(apiTitle).append(" ");
             sv.append(apiVersion).append(" r");
@@ -216,7 +216,7 @@ public class TVRage {
     public static boolean isValidString(String testString) {
         if ((testString == null)
                 || (testString.trim().equals(""))
-                || (testString.equalsIgnoreCase(TVRage.UNKNOWN))) {
+                || (testString.equalsIgnoreCase(TVRageApi.UNKNOWN))) {
             return false;
         }
         return true;

@@ -7,11 +7,11 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.model;
+package com.omertron.tvrageapi.model;
 
-import com.moviejukebox.tvrage.TVRage;
-import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
-import static com.moviejukebox.tvrage.TVRage.isValidString;
+import com.omertron.tvrageapi.TVRageApi;
+import static com.omertron.tvrageapi.TVRageApi.convertStrToInt;
+import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
@@ -36,7 +36,7 @@ public class EpisodeList implements Serializable {
     private Map<EpisodeNumber, Episode> episodeList;
 
     public EpisodeList() {
-        showName = TVRage.UNKNOWN;
+        showName = TVRageApi.UNKNOWN;
         totalSeasons = 0;
         episodeList = new TreeMap<EpisodeNumber, Episode>();
     }
@@ -84,7 +84,7 @@ public class EpisodeList implements Serializable {
         if (isValidString(showName)) {
             this.showName = showName.trim();
         } else {
-            this.showName = TVRage.UNKNOWN;
+            this.showName = TVRageApi.UNKNOWN;
         }
     }
 

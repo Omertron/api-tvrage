@@ -7,7 +7,7 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.tools;
+package com.omertron.tvrageapi.tools;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

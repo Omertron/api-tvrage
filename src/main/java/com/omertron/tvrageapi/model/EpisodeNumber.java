@@ -7,9 +7,9 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.model;
+package com.omertron.tvrageapi.model;
 
-import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
+import static com.omertron.tvrageapi.TVRageApi.convertStrToInt;
 import java.io.Serializable;
 
 public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {

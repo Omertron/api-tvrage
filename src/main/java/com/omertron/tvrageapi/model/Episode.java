@@ -7,10 +7,10 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.model;
+package com.omertron.tvrageapi.model;
 
-import com.moviejukebox.tvrage.TVRage;
-import static com.moviejukebox.tvrage.TVRage.isValidString;
+import com.omertron.tvrageapi.TVRageApi;
+import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.Date;
 import org.pojava.datetime.DateTime;
@@ -24,7 +24,7 @@ public class Episode implements Serializable {
     /*
      * Properties
      */
-    private static final String UNKNOWN = TVRage.UNKNOWN;
+    private static final String UNKNOWN = TVRageApi.UNKNOWN;
     private EpisodeNumber episodeNumber = new EpisodeNumber(0, 0);
     private String productionId = UNKNOWN;
     private Date airDate = null;

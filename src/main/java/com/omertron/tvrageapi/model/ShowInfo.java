@@ -7,11 +7,11 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.model;
+package com.omertron.tvrageapi.model;
 
-import com.moviejukebox.tvrage.TVRage;
-import static com.moviejukebox.tvrage.TVRage.convertStrToInt;
-import static com.moviejukebox.tvrage.TVRage.isValidString;
+import com.omertron.tvrageapi.TVRageApi;
+import static com.omertron.tvrageapi.TVRageApi.convertStrToInt;
+import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,24 +33,24 @@ public class ShowInfo implements Serializable {
     /*
      * Properties
      */
-    private String airDay = TVRage.UNKNOWN;
-    private String airTime = TVRage.UNKNOWN;
+    private String airDay = TVRageApi.UNKNOWN;
+    private String airTime = TVRageApi.UNKNOWN;
     private List<CountryDetail> akas = new ArrayList<CountryDetail>();
-    private String classification = TVRage.UNKNOWN;
-    private String country = TVRage.UNKNOWN;
-    private String ended = TVRage.UNKNOWN;
+    private String classification = TVRageApi.UNKNOWN;
+    private String country = TVRageApi.UNKNOWN;
+    private String ended = TVRageApi.UNKNOWN;
     private List<String> genres = new ArrayList<String>();
     private List<CountryDetail> network = new ArrayList<CountryDetail>();
-    private String originCountry = TVRage.UNKNOWN;
+    private String originCountry = TVRageApi.UNKNOWN;
     private int runtime = 0;
     private int showID = 0;
-    private String showLink = TVRage.UNKNOWN;
-    private String showName = TVRage.UNKNOWN;
+    private String showLink = TVRageApi.UNKNOWN;
+    private String showName = TVRageApi.UNKNOWN;
     private Date startDate = null;
     private int started = 0;
-    private String status = TVRage.UNKNOWN;
-    private String summary = TVRage.UNKNOWN;
-    private String timezone = TVRage.UNKNOWN;
+    private String status = TVRageApi.UNKNOWN;
+    private String summary = TVRageApi.UNKNOWN;
+    private String timezone = TVRageApi.UNKNOWN;
     private int totalSeasons = 0;
 
     public boolean isValid() {
@@ -201,7 +201,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(airDay)) {
             this.airDay = airDay;
         } else {
-            this.airDay = TVRage.UNKNOWN;
+            this.airDay = TVRageApi.UNKNOWN;
         }
     }
 
@@ -209,7 +209,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(airTime)) {
             this.airTime = airTime;
         } else {
-            this.airTime = TVRage.UNKNOWN;
+            this.airTime = TVRageApi.UNKNOWN;
         }
     }
 
@@ -221,7 +221,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(classification)) {
             this.classification = classification;
         } else {
-            this.classification = TVRage.UNKNOWN;
+            this.classification = TVRageApi.UNKNOWN;
         }
     }
 
@@ -229,7 +229,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(country)) {
             this.country = country;
         } else {
-            this.country = TVRage.UNKNOWN;
+            this.country = TVRageApi.UNKNOWN;
         }
     }
 
@@ -237,7 +237,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(ended)) {
             this.ended = ended;
         } else {
-            this.ended = TVRage.UNKNOWN;
+            this.ended = TVRageApi.UNKNOWN;
         }
     }
 
@@ -253,7 +253,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(originCountry)) {
             this.originCountry = originCountry;
         } else {
-            this.originCountry = TVRage.UNKNOWN;
+            this.originCountry = TVRageApi.UNKNOWN;
         }
     }
 
@@ -277,7 +277,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(showLink)) {
             this.showLink = showLink;
         } else {
-            this.showLink = TVRage.UNKNOWN;
+            this.showLink = TVRageApi.UNKNOWN;
         }
     }
 
@@ -285,7 +285,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(showName)) {
             this.showName = showName;
         } else {
-            this.showName = TVRage.UNKNOWN;
+            this.showName = TVRageApi.UNKNOWN;
         }
     }
 
@@ -316,7 +316,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(status)) {
             this.status = status;
         } else {
-            this.status = TVRage.UNKNOWN;
+            this.status = TVRageApi.UNKNOWN;
         }
     }
 
@@ -324,7 +324,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(summary)) {
             this.summary = summary;
         } else {
-            this.summary = TVRage.UNKNOWN;
+            this.summary = TVRageApi.UNKNOWN;
         }
     }
 
@@ -332,7 +332,7 @@ public class ShowInfo implements Serializable {
         if (isValidString(timezone)) {
             this.timezone = timezone;
         } else {
-            this.timezone = TVRage.UNKNOWN;
+            this.timezone = TVRageApi.UNKNOWN;
         }
     }
 

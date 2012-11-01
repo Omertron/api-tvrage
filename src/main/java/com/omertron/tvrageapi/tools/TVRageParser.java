@@ -7,10 +7,14 @@
  *      For any reuse or distribution, you must make clear to others the
  *      license terms of this work.
  */
-package com.moviejukebox.tvrage.tools;
+package com.omertron.tvrageapi.tools;
 
-import com.moviejukebox.tvrage.TVRage;
-import com.moviejukebox.tvrage.model.*;
+import com.omertron.tvrageapi.TVRageApi;
+import com.omertron.tvrageapi.model.CountryDetail;
+import com.omertron.tvrageapi.model.Episode;
+import com.omertron.tvrageapi.model.EpisodeList;
+import com.omertron.tvrageapi.model.EpisodeNumber;
+import com.omertron.tvrageapi.model.ShowInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -226,21 +230,21 @@ public class TVRageParser {
 
         // ShowName
         text = DOMHelper.getValueFromElement(eShowInfo, "showname");
-        if (!TVRage.isValidString(text)) {
+        if (!TVRageApi.isValidString(text)) {
             text = DOMHelper.getValueFromElement(eShowInfo, "name");
         }
         showInfo.setShowName(text);
 
         // ShowLink
         text = DOMHelper.getValueFromElement(eShowInfo, "showlink");
-        if (!TVRage.isValidString(text)) {
+        if (!TVRageApi.isValidString(text)) {
             text = DOMHelper.getValueFromElement(eShowInfo, "link");
         }
         showInfo.setShowLink(text);
 
         // Country
         text = DOMHelper.getValueFromElement(eShowInfo, "country");
-        if (!TVRage.isValidString(text)) {
+        if (!TVRageApi.isValidString(text)) {
             text = DOMHelper.getValueFromElement(eShowInfo, "origin_country");
         }
         showInfo.setCountry(text);
