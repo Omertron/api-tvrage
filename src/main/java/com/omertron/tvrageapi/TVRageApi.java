@@ -49,7 +49,7 @@ public class TVRageApi {
 
         this.apiKey = apiKey;
 
-        FilteringLayout.addApiKey(apiKey);
+        FilteringLayout.addReplacementString(apiKey);
     }
 
     /**
