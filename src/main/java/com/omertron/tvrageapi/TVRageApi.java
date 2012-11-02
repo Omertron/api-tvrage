@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
  */
 public class TVRageApi {
 
+    private static final Logger LOGGER = Logger.getLogger(TVRageApi.class);
     private String apiKey = null;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
@@ -35,7 +36,6 @@ public class TVRageApi {
     private static final String API_SEARCH = "search.php";
     private static final String API_SHOWINFO = "showinfo.php";
     private static final String API_SITE = "http://services.tvrage.com/myfeeds/";
-    private static final Logger LOGGER = Logger.getLogger(TVRageApi.class);
 
     /**
      * Constructor, requires the API Key
@@ -172,7 +172,7 @@ public class TVRageApi {
     private StringBuilder buildURL(String urlParameter, String urlData) {
         // apiSite + search.php 	  + apiKey + &show=buffy
         // apiSite + showinfo.php 	  + apiKey + &sid=2930
-        // apiSite + episode_list.php + apiKey + &sid=2930
+        // apiSite + episode_list.php     + apiKey + &sid=2930
 
         StringBuilder tvrageURL = new StringBuilder();
         tvrageURL.append(API_SITE);
@@ -194,8 +194,7 @@ public class TVRageApi {
             return new StringBuilder(UNKNOWN);
         }
 
-//		System.out.println("Search URL: " + tvrageURL); // XXX DEBUG
-
+        LOGGER.trace("Search URL: " + tvrageURL);
         return tvrageURL;
     }
 

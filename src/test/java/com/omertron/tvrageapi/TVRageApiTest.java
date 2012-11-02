@@ -41,7 +41,7 @@ public class TVRageApiTest {
     @Test
     public void testGetEpisodeInfo() {
         Episode episode = tvr.getEpisodeInfo(SHOW_ID_STR, "1", "1");
-        assertTrue(episode.getTitle().equals("Pilot"));
+        assertTrue(episode.getTitle().equals("Chuck Versus the Intersect"));
     }
 
     @Test
