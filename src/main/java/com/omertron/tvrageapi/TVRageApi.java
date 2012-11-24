@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
  */
 public class TVRageApi {
 
-    private static final Logger LOGGER = Logger.getLogger(TVRageApi.class);
+    private static final Logger logger = Logger.getLogger(TVRageApi.class);
     private String apiKey = null;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
@@ -50,25 +50,6 @@ public class TVRageApi {
         this.apiKey = apiKey;
 
         FilteringLayout.addReplacementString(apiKey);
-    }
-
-    /**
-     * Output the API version information to the debug log
-     */
-    public static void showVersion() {
-        String apiTitle = TVRageApi.class.getPackage().getSpecificationTitle();
-
-        if (StringUtils.isNotBlank(apiTitle)) {
-            String apiVersion = TVRageApi.class.getPackage().getSpecificationVersion();
-            String apiRevision = TVRageApi.class.getPackage().getImplementationVersion();
-            StringBuilder sv = new StringBuilder();
-            sv.append(apiTitle).append(" ");
-            sv.append(apiVersion).append(" r");
-            sv.append(apiRevision);
-            LOGGER.debug(sv.toString());
-        } else {
-            LOGGER.debug("API-TVRage version/revision information not available");
-        }
     }
 
     /**
@@ -194,7 +175,7 @@ public class TVRageApi {
             return new StringBuilder(UNKNOWN);
         }
 
-        LOGGER.trace("Search URL: " + tvrageURL);
+        logger.trace("Search URL: " + tvrageURL);
         return tvrageURL;
     }
 
