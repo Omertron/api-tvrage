@@ -13,7 +13,7 @@
 
     <groupId>com.omertron</groupId>
     <artifactId>tvrageapi</artifactId>
-    <version>1.4</version>
+    <version>1.5-SNAPSHOT</version>
     <name>API-TVRage</name>
     <packaging>jar</packaging>
     <description>API for the TVRage.com website</description>
