@@ -121,7 +121,7 @@ public class ShowInfo implements Serializable {
      * Add a single network to the list
      *
      * @param country
-     * @param network
+     * @param networkName
      */
     public void addNetwork(String country, String networkName) {
         if (!isValidString(country) || !isValidString(networkName)) {

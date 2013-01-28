@@ -68,7 +68,6 @@ public class TVRageApi {
      * @param showID
      * @param seasonId
      * @param episodeId
-     * @return
      */
     public Episode getEpisodeInfo(String showID, String seasonId, String episodeId) {
         if (!isValidString(showID) || !isValidString(seasonId) || !isValidString(episodeId)) {
@@ -87,7 +86,6 @@ public class TVRageApi {
      * Get the episode information for all episodes for a show
      *
      * @param showID
-     * @return
      */
     public EpisodeList getEpisodeList(String showID) {
         if (!isValidString(showID)) {
@@ -158,7 +156,6 @@ public class TVRageApi {
      * Build the API web URL for the process
      *
      * @param urlParameter
-     * @return
      */
     private StringBuilder buildURL(String urlParameter, String urlData) {
         // apiSite + search.php 	  + apiKey + &show=buffy

@@ -62,7 +62,6 @@ public class Episode implements Serializable {
     /**
      * Added as a convenience method
      *
-     * @return
      */
     public int getEpisode() {
         return episodeNumber.getEpisode();
@@ -71,7 +70,6 @@ public class Episode implements Serializable {
     /**
      * Added as a convenience method
      *
-     * @return
      */
     public int getSeason() {
         return episodeNumber.getSeason();

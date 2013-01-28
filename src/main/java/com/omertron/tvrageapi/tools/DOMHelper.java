@@ -47,7 +47,6 @@ public class DOMHelper {
      * Gets the string value of the tag element name passed
      * @param element
      * @param tagName
-     * @return
      */
     public static String getValueFromElement(Element element, String tagName) {
         String returnValue = "";
@@ -67,7 +66,6 @@ public class DOMHelper {
     /**
      * Get a DOM document from the supplied URL
      * @param url
-     * @return
      * @throws IOException
      * @throws ParserConfigurationException
      * @throws SAXException
