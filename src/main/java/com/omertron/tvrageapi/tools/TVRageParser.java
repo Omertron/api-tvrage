@@ -29,7 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -38,7 +39,7 @@ import org.w3c.dom.NodeList;
 public class TVRageParser {
 
     private static final String LOG_MESSAGE = "TVRage Error: ";
-    private static Logger logger = Logger.getLogger(TVRageParser.class);
+    private static Logger LOG = LoggerFactory.getLogger(TVRageParser.class);
 
     // Hide the constructor
     protected TVRageParser() {
@@ -53,7 +54,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.warn(LOG_MESSAGE + error.getMessage());
+            LOG.warn(LOG_MESSAGE + error.getMessage());
             return episode;
         }
 
@@ -77,7 +78,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.warn(LOG_MESSAGE + error.getMessage());
+            LOG.warn(LOG_MESSAGE + error.getMessage());
             return epList;
         }
 
@@ -138,7 +139,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.warn(LOG_MESSAGE + error.getMessage());
+            LOG.warn(LOG_MESSAGE + error.getMessage());
             return showList;
         }
 
@@ -168,7 +169,7 @@ public class TVRageParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
         } catch (Exception error) {
-            logger.warn(LOG_MESSAGE + error.getMessage());
+            LOG.warn(LOG_MESSAGE + error.getMessage());
             return showList;
         }
 

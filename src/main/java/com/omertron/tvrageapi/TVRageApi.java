@@ -22,13 +22,13 @@ package com.omertron.tvrageapi;
 import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.ShowInfo;
-import com.omertron.tvrageapi.tools.FilteringLayout;
 import com.omertron.tvrageapi.tools.TVRageParser;
 import com.omertron.tvrageapi.tools.WebBrowser;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * TV Rage API
@@ -38,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 public class TVRageApi {
 
-    private static final Logger logger = Logger.getLogger(TVRageApi.class);
+    private static final Logger logger = LoggerFactory.getLogger(TVRageApi.class);
     private String apiKey = null;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
@@ -58,8 +58,6 @@ public class TVRageApi {
         }
 
         this.apiKey = apiKey;
-
-        FilteringLayout.addReplacementString(apiKey);
     }
 
     /**

@@ -22,10 +22,9 @@ package com.omertron.tvrageapi;
 import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.ShowInfo;
-import com.omertron.tvrageapi.tools.FilteringLayout;
 import java.util.List;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -33,6 +32,8 @@ import org.junit.Test;
 
 public class TVRageApiTest {
 
+    // Logger
+    private static final Logger LOG = Logger.getLogger(TVRageApiTest.class.getSimpleName());
     private static String apikey = "1tyJ0xqGoNMyZTaD1AY7";
     private TVRageApi tvr;
     private static final String SHOW_ID_STR = "15614";
@@ -42,20 +43,20 @@ public class TVRageApiTest {
     @Before
     public void setUp() throws Exception {
         tvr = new TVRageApi(apikey);
-        // Set the logger level to TRACE
-        Logger.getRootLogger().setLevel(Level.TRACE);
-        // Make sure the filter isn't applied to the test output
-        FilteringLayout.addReplacementString("DO_NOT_MATCH");
+        // Set the logger level to ALL
+        LOG.setLevel(Level.ALL);
     }
 
     @Test
     public void testGetEpisodeInfo() {
+        LOG.info("test getEpisodeInfo");
         Episode episode = tvr.getEpisodeInfo(SHOW_ID_STR, "1", "1");
         assertTrue(episode.getTitle().equals("Chuck Versus the Intersect"));
     }
 
     @Test
     public void testGetEpisodeList() {
+        LOG.info("test getEpisodeList");
         EpisodeList episodeList = tvr.getEpisodeList(SHOW_ID_STR);
         assertFalse(episodeList.getShowName().equals(TVRageApi.UNKNOWN));
         assertFalse(episodeList.getEpisodeList().isEmpty());
@@ -63,18 +64,21 @@ public class TVRageApiTest {
 
     @Test
     public void testGetShowInfoInt() {
+        LOG.info("test getShowInfoInt");
         ShowInfo showInfo = tvr.getShowInfo(SHOW_ID_INT);
         assertFalse(showInfo.getShowName().equals(TVRageApi.UNKNOWN));
     }
 
     @Test
     public void testGetShowInfoString() {
+        LOG.info("test getShowInfoString");
         ShowInfo showInfo = tvr.getShowInfo(SHOW_ID_STR);
         assertFalse(showInfo.getShowName().equals(TVRageApi.UNKNOWN));
     }
 
     @Test
     public void testSearchShow() {
+        LOG.info("test searchShow");
         boolean found = false;
 
         List<ShowInfo> showList = tvr.searchShow(SHOW_NAME);
