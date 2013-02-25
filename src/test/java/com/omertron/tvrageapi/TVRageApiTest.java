@@ -23,17 +23,17 @@ import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.ShowInfo;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TVRageApiTest {
 
     // Logger
-    private static final Logger LOG = Logger.getLogger(TVRageApiTest.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(TVRageApiTest.class);
     private static String apikey = "1tyJ0xqGoNMyZTaD1AY7";
     private TVRageApi tvr;
     private static final String SHOW_ID_STR = "15614";
@@ -42,9 +42,8 @@ public class TVRageApiTest {
 
     @Before
     public void setUp() throws Exception {
+        TestLogger.Configure();
         tvr = new TVRageApi(apikey);
-        // Set the logger level to ALL
-        LOG.setLevel(Level.ALL);
     }
 
     @Test
