@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
 public class TVRageParser {
 
     private static final String LOG_MESSAGE = "TVRage Error: ";
-    private static Logger LOG = LoggerFactory.getLogger(TVRageParser.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TVRageParser.class);
 
     // Hide the constructor
     protected TVRageParser() {

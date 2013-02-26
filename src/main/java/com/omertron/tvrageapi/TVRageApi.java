@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public class TVRageApi {
 
-    private static final Logger logger = LoggerFactory.getLogger(TVRageApi.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TVRageApi.class);
     private String apiKey = null;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
@@ -180,7 +180,7 @@ public class TVRageApi {
             return new StringBuilder(UNKNOWN);
         }
 
-        logger.trace("Search URL: " + tvrageURL);
+        LOG.trace("Search URL: " + tvrageURL);
         return tvrageURL;
     }
 
