@@ -66,6 +66,7 @@ public class TVRageApi {
      * @param showID
      * @param seasonId
      * @param episodeId
+     * @return
      */
     public Episode getEpisodeInfo(String showID, String seasonId, String episodeId) {
         if (!isValidString(showID) || !isValidString(seasonId) || !isValidString(episodeId)) {
@@ -84,6 +85,7 @@ public class TVRageApi {
      * Get the episode information for all episodes for a show
      *
      * @param showID
+     * @return
      */
     public EpisodeList getEpisodeList(String showID) {
         if (!isValidString(showID)) {
@@ -129,7 +131,6 @@ public class TVRageApi {
      * @return list of matching shows
      */
     public List<ShowInfo> searchShow(String showName) {
-
         if (!isValidString(showName)) {
             return new ArrayList<ShowInfo>();
         }
@@ -187,7 +188,7 @@ public class TVRageApi {
     public static int convertStrToInt(String value) {
         try {
             return Integer.parseInt(value);
-        } catch (Exception ignore) {
+        } catch (NumberFormatException ex) {
             return 0;
         }
     }

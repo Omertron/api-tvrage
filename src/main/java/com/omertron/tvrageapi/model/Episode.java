@@ -53,15 +53,13 @@ public class Episode implements Serializable {
     }
 
     public boolean isValid() {
-        if (episodeNumber.isValid() && isValidString(title)) {
-            return true;
-        }
-        return false;
+        return episodeNumber.isValid() && isValidString(title);
     }
 
     /**
      * Added as a convenience method
      *
+     * @return
      */
     public int getEpisode() {
         return episodeNumber.getEpisode();
@@ -70,6 +68,7 @@ public class Episode implements Serializable {
     /**
      * Added as a convenience method
      *
+     * @return
      */
     public int getSeason() {
         return episodeNumber.getSeason();
@@ -154,7 +153,7 @@ public class Episode implements Serializable {
     public void setRating(String rating) {
         try {
             this.rating = Float.parseFloat(rating);
-        } catch (Exception ignore) {
+        } catch (NumberFormatException ignore) {
             this.rating = 0.0f;
         }
     }

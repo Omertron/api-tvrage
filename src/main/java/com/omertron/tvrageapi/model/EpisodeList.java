@@ -52,10 +52,7 @@ public class EpisodeList implements Serializable {
     }
 
     public boolean isValid() {
-        if (isValidString(showName) && !episodeList.isEmpty()) {
-            return true;
-        }
-        return false;
+        return isValidString(showName) && !episodeList.isEmpty();
     }
 
     public Map<EpisodeNumber, Episode> getEpisodeList() {

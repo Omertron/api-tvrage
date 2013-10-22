@@ -87,14 +87,6 @@ public class CountryDetail implements Serializable {
     }
 
     public boolean isValid() {
-        if (!isValidString(country)) {
-            return false;
-        }
-
-        if (!isValidString(detail)) {
-            return false;
-        }
-
-        return true;
+        return isValidString(country) && isValidString(detail);
     }
 }

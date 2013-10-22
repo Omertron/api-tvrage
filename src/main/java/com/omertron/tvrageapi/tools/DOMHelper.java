@@ -33,10 +33,12 @@ import org.xml.sax.SAXException;
 
 /**
  * Generic set of routines to process the DOM model data
+ *
  * @author Stuart.Boston
  *
  */
 public class DOMHelper {
+
     // Hide the constructor
     protected DOMHelper() {
         // prevents calls from subclass
@@ -45,11 +47,13 @@ public class DOMHelper {
 
     /**
      * Gets the string value of the tag element name passed
+     *
      * @param element
      * @param tagName
+     * @return
      */
     public static String getValueFromElement(Element element, String tagName) {
-        String returnValue = "";
+        String returnValue;
 
         try {
             NodeList elementNodeList = element.getElementsByTagName(tagName);
@@ -65,7 +69,9 @@ public class DOMHelper {
 
     /**
      * Get a DOM document from the supplied URL
+     *
      * @param url
+     * @return
      * @throws IOException
      * @throws ParserConfigurationException
      * @throws SAXException
@@ -74,7 +80,7 @@ public class DOMHelper {
             throws IOException, ParserConfigurationException, SAXException {
         Document doc = null;
         InputStream in = null;
-        String webPage = null;
+        String webPage;
 
         try {
             webPage = WebBrowser.request(url);

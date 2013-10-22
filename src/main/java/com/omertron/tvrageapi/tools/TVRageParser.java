@@ -25,16 +25,19 @@ import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.EpisodeNumber;
 import com.omertron.tvrageapi.model.ShowInfo;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.xml.parsers.ParserConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class TVRageParser {
 
@@ -47,14 +50,27 @@ public class TVRageParser {
         throw new UnsupportedOperationException();
     }
 
-    public static Episode getEpisodeInfo(String searchUrl) {
-        Document doc;
-        Episode episode = new Episode();
+    private static Document getDocFromUrl(String searchUrl) {
+        Document doc = null;
 
         try {
             doc = DOMHelper.getEventDocFromUrl(searchUrl);
-        } catch (Exception error) {
-            LOG.warn(LOG_MESSAGE + error.getMessage());
+        } catch (IOException ex) {
+            LOG.warn(LOG_MESSAGE + ex.getMessage());
+        } catch (ParserConfigurationException ex) {
+            LOG.warn(LOG_MESSAGE + ex.getMessage());
+        } catch (SAXException ex) {
+            LOG.warn(LOG_MESSAGE + ex.getMessage());
+        }
+
+        return doc;
+    }
+
+    public static Episode getEpisodeInfo(String searchUrl) {
+        Episode episode = new Episode();
+
+        Document doc = getDocFromUrl(searchUrl);
+        if (doc == null) {
             return episode;
         }
 
@@ -73,12 +89,9 @@ public class TVRageParser {
 
     public static EpisodeList getEpisodeList(String searchUrl) {
         EpisodeList epList = new EpisodeList();
-        Document doc;
 
-        try {
-            doc = DOMHelper.getEventDocFromUrl(searchUrl);
-        } catch (Exception error) {
-            LOG.warn(LOG_MESSAGE + error.getMessage());
+        Document doc = getDocFromUrl(searchUrl);
+        if (doc == null) {
             return epList;
         }
 
@@ -134,12 +147,9 @@ public class TVRageParser {
     public static List<ShowInfo> getSearchShow(String searchUrl) {
         List<ShowInfo> showList = new ArrayList<ShowInfo>();
         ShowInfo showInfo;
-        Document doc;
 
-        try {
-            doc = DOMHelper.getEventDocFromUrl(searchUrl);
-        } catch (Exception error) {
-            LOG.warn(LOG_MESSAGE + error.getMessage());
+        Document doc = getDocFromUrl(searchUrl);
+        if (doc == null) {
             return showList;
         }
 
@@ -164,12 +174,9 @@ public class TVRageParser {
     public static List<ShowInfo> getShowInfo(String searchUrl) {
         List<ShowInfo> showList = new ArrayList<ShowInfo>();
         ShowInfo showInfo;
-        Document doc;
 
-        try {
-            doc = DOMHelper.getEventDocFromUrl(searchUrl);
-        } catch (Exception error) {
-            LOG.warn(LOG_MESSAGE + error.getMessage());
+        Document doc = getDocFromUrl(searchUrl);
+        if (doc == null) {
             return showList;
         }
 

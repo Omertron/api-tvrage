@@ -64,10 +64,7 @@ public class ShowInfo implements Serializable {
     private int totalSeasons = 0;
 
     public boolean isValid() {
-        if (showID > 0) {
-            return true;
-        }
-        return false;
+        return showID > 0;
     }
 
     /**
