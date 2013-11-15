@@ -32,9 +32,12 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
      * Properties
      */
     private static final int FACTOR = 1000;
-    private int absolute;   // The absolute episode number across all seasons
-    private int episode;    // The episode number within the season
-    private int season;     // The show season
+    // The absolute episode number across all seasons
+    private int absolute;
+    // The episode number within the season
+    private int episode;
+    // The show season
+    private int season;
 
     public EpisodeNumber() {
         this.season = 0;

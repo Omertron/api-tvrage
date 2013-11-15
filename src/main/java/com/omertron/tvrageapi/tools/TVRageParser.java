@@ -124,7 +124,8 @@ public class TVRageParser {
             nEpisodeList = nlEpisodeList.item(loop);
             if (nEpisodeList.getNodeType() == Node.ELEMENT_NODE) {
                 eEpisodeList = (Element) nEpisodeList;
-                String season = eEpisodeList.getAttribute("no"); // Get the season number
+                // Get the season number
+                String season = eEpisodeList.getAttribute("no");
 
                 NodeList nlEpisode = eEpisodeList.getElementsByTagName("episode");
                 if (nlEpisode == null || nlEpisode.getLength() == 0) {

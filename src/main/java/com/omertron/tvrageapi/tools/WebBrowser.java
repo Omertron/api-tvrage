@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -47,8 +48,10 @@ public final class WebBrowser {
     private static String proxyUsername = null;
     private static String proxyPassword = null;
     private static String proxyEncodedPassword = null;
-    private static int webTimeoutConnect = 25000;   // 25 second timeout
-    private static int webTimeoutRead = 90000;      // 90 second timeout
+    // 25 second timeout
+    private static int webTimeoutConnect = 25000;
+    // 90 second timeout
+    private static int webTimeoutRead = 90000;
 
     // Hide the constructor
     protected WebBrowser() {
@@ -246,7 +249,11 @@ public final class WebBrowser {
 
         if (proxyUsername != null) {
             proxyEncodedPassword = proxyUsername + ":" + proxyPassword;
-            proxyEncodedPassword = "Basic " + new String(Base64.encodeBase64((proxyUsername + ":" + proxyPassword).getBytes()));
+            try {
+                proxyEncodedPassword = "Basic " + new String(Base64.encodeBase64((proxyUsername + ":" + proxyPassword).getBytes("UTF-8")));
+            } catch (UnsupportedEncodingException ex) {
+                // Ignore
+            }
         }
     }
 
