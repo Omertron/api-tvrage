@@ -22,13 +22,15 @@ package com.omertron.tvrageapi;
 import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.ShowInfo;
+import com.omertron.tvrageapi.tools.DOMHelper;
 import com.omertron.tvrageapi.tools.TVRageParser;
-import com.omertron.tvrageapi.tools.WebBrowser;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yamj.api.common.http.CommonHttpClient;
+import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 /**
  * TV Rage API
@@ -40,6 +42,7 @@ public class TVRageApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(TVRageApi.class);
     private String apiKey = null;
+    private CommonHttpClient httpClient;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
     private static final String API_EPISODE_LIST = "episode_list.php";
@@ -53,11 +56,18 @@ public class TVRageApi {
      * @param apiKey
      */
     public TVRageApi(String apiKey) {
+        // Use a default pooling client if one is not provided
+        this(apiKey, new DefaultPoolingHttpClient());
+    }
+
+    public TVRageApi(String apiKey, CommonHttpClient httpClient) {
         if (StringUtils.isBlank(apiKey)) {
             throw new UnsupportedOperationException("No API Key provided!");
         }
 
         this.apiKey = apiKey;
+        this.httpClient = httpClient;
+        DOMHelper.setHttpClient(httpClient);
     }
 
     /**
@@ -139,16 +149,26 @@ public class TVRageApi {
         return TVRageParser.getSearchShow(tvrageURL);
     }
 
+    /**
+     * Set the web browser proxy information
+     *
+     * @param host
+     * @param port
+     * @param username
+     * @param password
+     */
     public void setProxy(String host, String port, String username, String password) {
-        WebBrowser.setProxyHost(host);
-        WebBrowser.setProxyPort(port);
-        WebBrowser.setProxyUsername(username);
-        WebBrowser.setProxyPassword(password);
+        httpClient.setProxy(host, Integer.parseInt(port), username, password);
     }
 
+    /**
+     * Set the web browser timeout settings
+     *
+     * @param webTimeoutConnect
+     * @param webTimeoutRead
+     */
     public void setTimeout(int webTimeoutConnect, int webTimeoutRead) {
-        WebBrowser.setWebTimeoutConnect(webTimeoutConnect);
-        WebBrowser.setWebTimeoutRead(webTimeoutRead);
+        httpClient.setTimeouts(webTimeoutConnect, webTimeoutRead);
     }
 
     /**
@@ -200,11 +220,6 @@ public class TVRageApi {
      * @return False if the string is empty, null or UNKNOWN, True otherwise
      */
     public static boolean isValidString(String testString) {
-        if ((testString == null)
-                || (testString.trim().equals(""))
-                || (testString.equalsIgnoreCase(TVRageApi.UNKNOWN))) {
-            return false;
-        }
-        return true;
+        return StringUtils.isNotBlank(testString) && (!testString.equalsIgnoreCase(TVRageApi.UNKNOWN));
     }
 }

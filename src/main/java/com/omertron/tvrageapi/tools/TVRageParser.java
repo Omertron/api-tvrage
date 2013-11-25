@@ -115,13 +115,27 @@ public class TVRageParser {
         }
 
         // Now process the individual seasons
-        nlEpisodeList = doc.getElementsByTagName("Season");
-        if (nlEpisodeList == null || nlEpisodeList.getLength() == 0) {
-            return epList;
+        processSeasons(epList, doc.getElementsByTagName("Season"));
+
+        return epList;
+    }
+
+    /**
+     * process the individual seasons
+     *
+     * @param epList
+     * @param nlSeasons
+     */
+    private static void processSeasons(EpisodeList epList, NodeList nlSeasons) {
+
+        if (nlSeasons == null || nlSeasons.getLength() == 0) {
+            return;
         }
 
-        for (int loop = 0; loop < nlEpisodeList.getLength(); loop++) {
-            nEpisodeList = nlEpisodeList.item(loop);
+        Node nEpisodeList;
+        Element eEpisodeList;
+        for (int loop = 0; loop < nlSeasons.getLength(); loop++) {
+            nEpisodeList = nlSeasons.item(loop);
             if (nEpisodeList.getNodeType() == Node.ELEMENT_NODE) {
                 eEpisodeList = (Element) nEpisodeList;
                 // Get the season number
@@ -141,8 +155,6 @@ public class TVRageParser {
                 }
             }
         }
-
-        return epList;
     }
 
     public static List<ShowInfo> getSearchShow(String searchUrl) {
@@ -302,6 +314,24 @@ public class TVRageParser {
         showInfo.setTimezone(DOMHelper.getValueFromElement(eShowInfo, "timezone"));
 
         // Network
+        processNetwork(showInfo, eShowInfo);
+
+        // AKAs
+        processAka(showInfo, eShowInfo);
+
+        // Genres
+        processGenre(showInfo, eShowInfo);
+        
+        return showInfo;
+    }
+
+    /**
+     * Process network information
+     *
+     * @param showInfo
+     * @param eShowInfo
+     */
+    private static void processNetwork(ShowInfo showInfo, Element eShowInfo) {
         NodeList nlNetwork = eShowInfo.getElementsByTagName("network");
         for (int nodeLoop = 0; nodeLoop < nlNetwork.getLength(); nodeLoop++) {
             Node nShowInfo = nlNetwork.item(nodeLoop);
@@ -313,8 +343,15 @@ public class TVRageParser {
                 showInfo.addNetwork(newNetwork);
             }
         }
+    }
 
-        // AKAs
+    /**
+     * Process AKA information
+     *
+     * @param showInfo
+     * @param eShowInfo
+     */
+    private static void processAka(ShowInfo showInfo, Element eShowInfo) {
         NodeList nlAkas = eShowInfo.getElementsByTagName("aka");
         for (int loop = 0; loop < nlAkas.getLength(); loop++) {
             Node nShowInfo = nlAkas.item(loop);
@@ -326,8 +363,15 @@ public class TVRageParser {
                 showInfo.addAka(newAka);
             }
         }
+    }
 
-        // Genres
+    /**
+     * Process Genres
+     *
+     * @param showInfo
+     * @param eShowInfo
+     */
+    private static void processGenre(ShowInfo showInfo, Element eShowInfo) {
         NodeList nlGenres = eShowInfo.getElementsByTagName("genre");
         for (int loop = 0; loop < nlGenres.getLength(); loop++) {
             Node nGenre = nlGenres.item(loop);
@@ -336,7 +380,5 @@ public class TVRageParser {
                 showInfo.addGenre(eGenre.getNodeValue());
             }
         }
-
-        return showInfo;
     }
 }

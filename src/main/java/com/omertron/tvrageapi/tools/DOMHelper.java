@@ -30,6 +30,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.yamj.api.common.http.CommonHttpClient;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -39,10 +40,16 @@ import org.xml.sax.SAXException;
  */
 public class DOMHelper {
 
+    private static CommonHttpClient httpClient;
+
     // Hide the constructor
     protected DOMHelper() {
         // prevents calls from subclass
         throw new UnsupportedOperationException();
+    }
+
+    public static void setHttpClient(CommonHttpClient httpClient) {
+        DOMHelper.httpClient = httpClient;
     }
 
     /**
@@ -53,18 +60,21 @@ public class DOMHelper {
      * @return
      */
     public static String getValueFromElement(Element element, String tagName) {
-        String returnValue;
-
-        try {
-            NodeList elementNodeList = element.getElementsByTagName(tagName);
-            Element tagElement = (Element) elementNodeList.item(0);
-            NodeList tagNodeList = tagElement.getChildNodes();
-            returnValue = ((Node) tagNodeList.item(0)).getNodeValue();
-        } catch (NullPointerException error) {
+        NodeList elementNodeList = element.getElementsByTagName(tagName);
+        if (elementNodeList == null) {
             return "";
-        }
+        } else {
+            Element tagElement = (Element) elementNodeList.item(0);
+            if (tagElement == null) {
+                return "";
+            }
 
-        return returnValue;
+            NodeList tagNodeList = tagElement.getChildNodes();
+            if (tagNodeList == null || tagNodeList.getLength() == 0) {
+                return "";
+            }
+            return ((Node) tagNodeList.item(0)).getNodeValue();
+        }
     }
 
     /**
@@ -83,7 +93,7 @@ public class DOMHelper {
         String webPage;
 
         try {
-            webPage = WebBrowser.request(url);
+            webPage = httpClient.requestContent(url);
 
             in = new ByteArrayInputStream(webPage.getBytes("UTF-8"));
 

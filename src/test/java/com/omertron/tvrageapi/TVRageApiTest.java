@@ -26,6 +26,7 @@ import java.util.List;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,16 +35,23 @@ public class TVRageApiTest {
 
     // Logger
     private static final Logger LOG = LoggerFactory.getLogger(TVRageApiTest.class);
-    private static String apikey = "1tyJ0xqGoNMyZTaD1AY7";
-    private TVRageApi tvr;
+    private static final String APIKEY = "1tyJ0xqGoNMyZTaD1AY7";
+    private final TVRageApi tvr;
     private static final String SHOW_ID_STR = "15614";
-    private static final int    SHOW_ID_INT = 15614;
-    private static final String SHOW_NAME   = "Chuck";
+    private static final int SHOW_ID_INT = 15614;
+    private static final String SHOW_NAME = "Chuck";
+
+    public TVRageApiTest() {
+        tvr = new TVRageApi(APIKEY);
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+        TestLogger.Configure();
+    }
 
     @Before
     public void setUp() throws Exception {
-        TestLogger.Configure();
-        tvr = new TVRageApi(apikey);
     }
 
     @Test
