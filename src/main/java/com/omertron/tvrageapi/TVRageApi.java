@@ -27,6 +27,7 @@ import com.omertron.tvrageapi.tools.TVRageParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yamj.api.common.http.CommonHttpClient;
@@ -126,12 +127,18 @@ public class TVRageApi {
         }
     }
 
+    /**
+     * Get the show information using the show ID
+     * @param showID
+     * @return
+     */
     public ShowInfo getShowInfo(String showID) {
-        if (!isValidString(showID)) {
+        int id = NumberUtils.toInt(showID, 0);
+        if (id > 0) {
+            return getShowInfo(id);
+        } else {
             return new ShowInfo();
         }
-
-        return getShowInfo(convertStrToInt(showID));
     }
 
     /**
@@ -203,14 +210,6 @@ public class TVRageApi {
 
         LOG.trace("Search URL: " + tvrageURL);
         return tvrageURL;
-    }
-
-    public static int convertStrToInt(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException ex) {
-            return 0;
-        }
     }
 
     /**

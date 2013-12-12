@@ -20,13 +20,17 @@
 package com.omertron.tvrageapi.model;
 
 import com.omertron.tvrageapi.TVRageApi;
-import static com.omertron.tvrageapi.TVRageApi.convertStrToInt;
 import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.pojava.datetime.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Full information about the show
@@ -36,6 +40,7 @@ import org.pojava.datetime.DateTime;
  */
 public class ShowInfo implements Serializable {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ShowInfo.class);
     /*
      * Serial Version
      */
@@ -269,7 +274,7 @@ public class ShowInfo implements Serializable {
     }
 
     public void setRuntime(String runtime) {
-        this.runtime = convertStrToInt(runtime);
+        this.runtime = NumberUtils.toInt(runtime, 0);
     }
 
     public void setShowID(int showID) {
@@ -277,7 +282,7 @@ public class ShowInfo implements Serializable {
     }
 
     public void setShowID(String showID) {
-        this.showID = convertStrToInt(showID);
+        this.showID = NumberUtils.toInt(showID, 0);
     }
 
     public void setShowLink(String showLink) {
@@ -304,7 +309,8 @@ public class ShowInfo implements Serializable {
         if (isValidString(startDate)) {
             try {
                 this.startDate = (new DateTime(startDate)).toDate();
-            } catch (Exception ignore) {
+            } catch (Exception ex) {
+                LOG.trace("Failed to convert date: " + startDate, ex);
                 // We can't do anything about this error, so return
                 this.startDate = null;
             }
@@ -316,7 +322,7 @@ public class ShowInfo implements Serializable {
     }
 
     public void setStarted(String started) {
-        this.started = convertStrToInt(started);
+        this.started = NumberUtils.toInt(started, 0);
     }
 
     public void setStatus(String status) {
@@ -348,51 +354,11 @@ public class ShowInfo implements Serializable {
     }
 
     public void setTotalSeasons(String totalSeasons) {
-        this.totalSeasons = convertStrToInt(totalSeasons);
+        this.totalSeasons = NumberUtils.toInt(totalSeasons, 0);
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[ShowInfo=[airDay=");
-        builder.append(airDay);
-        builder.append("][airTime=");
-        builder.append(airTime);
-        builder.append("][akas=");
-        builder.append(akas);
-        builder.append("][classification=");
-        builder.append(classification);
-        builder.append("][country=");
-        builder.append(country);
-        builder.append("][ended=");
-        builder.append(ended);
-        builder.append("][genres=");
-        builder.append(genres);
-        builder.append("][network=");
-        builder.append(network);
-        builder.append("][originCountry=");
-        builder.append(originCountry);
-        builder.append("][runtime=");
-        builder.append(runtime);
-        builder.append("][showID=");
-        builder.append(showID);
-        builder.append("][showLink=");
-        builder.append(showLink);
-        builder.append("][showName=");
-        builder.append(showName);
-        builder.append("][startDate=");
-        builder.append(startDate);
-        builder.append("][started=");
-        builder.append(started);
-        builder.append("][status=");
-        builder.append(status);
-        builder.append("][summary=");
-        builder.append(summary);
-        builder.append("][timezone=");
-        builder.append(timezone);
-        builder.append("][totalSeasons=");
-        builder.append(totalSeasons);
-        builder.append("]]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

@@ -20,11 +20,13 @@
 package com.omertron.tvrageapi.model;
 
 import com.omertron.tvrageapi.TVRageApi;
-import static com.omertron.tvrageapi.TVRageApi.convertStrToInt;
 import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * A list of episode in a HashMap format for easy searching and retrieval
@@ -100,19 +102,11 @@ public class EpisodeList implements Serializable {
     }
 
     public void setTotalSeasons(String totalSeasons) {
-        this.totalSeasons = convertStrToInt(totalSeasons);
+        this.totalSeasons = NumberUtils.toInt(totalSeasons, 0);
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[EpisodeList=[showName=");
-        builder.append(showName);
-        builder.append("][totalSeasons=");
-        builder.append(totalSeasons);
-        builder.append("][episodeList=");
-        builder.append(episodeList);
-        builder.append("]]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

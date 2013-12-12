@@ -23,9 +23,15 @@ import com.omertron.tvrageapi.TVRageApi;
 import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.Date;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.pojava.datetime.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Episode implements Serializable {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Episode.class);
 
     /*
      * Serial Version
@@ -98,7 +104,8 @@ public class Episode implements Serializable {
         if (isValidString(airDate)) {
             try {
                 this.airDate = (new DateTime(airDate)).toDate();
-            } catch (Exception ignore) {
+            } catch (Exception ex) {
+                LOG.trace("Failed to convert date: " + airDate, ex);
                 this.airDate = null;
             }
         } else {
@@ -160,17 +167,7 @@ public class Episode implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("[Episode=");
-        builder.append("[episodeNumber=").append(episodeNumber);
-        builder.append("][productionId=").append(productionId);
-        builder.append("][airDate=").append(airDate);
-        builder.append("][link=").append(link);
-        builder.append("][title=").append(title);
-        builder.append("][summary=").append(summary);
-        builder.append("][rating=").append(rating);
-        builder.append("][screenCap=").append(screenCap);
-        builder.append("]]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     public String getScreenCap() {

@@ -19,8 +19,10 @@
  */
 package com.omertron.tvrageapi.model;
 
-import static com.omertron.tvrageapi.TVRageApi.convertStrToInt;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.math.NumberUtils;
 
 public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
 
@@ -59,16 +61,16 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
     }
 
     public EpisodeNumber(String season, String episode) {
-        this.season = convertStrToInt(season);
-        this.episode = convertStrToInt(episode);
+        this.season = NumberUtils.toInt(season, 0);
+        this.episode = NumberUtils.toInt(episode, 0);
         // Calculate the absolute if we are not passed one
         this.absolute = calculateAbsolute(this.season, this.episode);
     }
 
     public EpisodeNumber(String season, String episode, String absolute) {
-        this.season = convertStrToInt(season);
-        this.episode = convertStrToInt(episode);
-        this.absolute = convertStrToInt(absolute);
+        this.season = NumberUtils.toInt(season, 0);
+        this.episode = NumberUtils.toInt(episode, 0);
+        this.absolute = NumberUtils.toInt(absolute, 0);
     }
 
     private int calculateAbsolute(int season, int episode) {
@@ -109,7 +111,7 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
     }
 
     public void setAbsolute(String absolute) {
-        this.absolute = convertStrToInt(absolute);
+        this.absolute = NumberUtils.toInt(absolute, 0);
     }
 
     public void setEpisode(int episode) {
@@ -117,7 +119,7 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
     }
 
     public void setEpisode(String episode) {
-        this.episode = convertStrToInt(episode);
+        this.episode = NumberUtils.toInt(episode, 0);
     }
 
     public void setSeason(int season) {
@@ -125,20 +127,12 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
     }
 
     public void setSeason(String season) {
-        this.season = convertStrToInt(season);
+        this.season = NumberUtils.toInt(season, 0);
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[EpisodeNumber=[absolute=");
-        builder.append(absolute);
-        builder.append("][episode=");
-        builder.append(episode);
-        builder.append("][season=");
-        builder.append(season);
-        builder.append("]]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     public boolean isValid() {

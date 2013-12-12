@@ -22,6 +22,8 @@ package com.omertron.tvrageapi.model;
 import com.omertron.tvrageapi.TVRageApi;
 import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Class to hold country along with a generic detail string
@@ -77,13 +79,7 @@ public class CountryDetail implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[CountryDetail=[country=");
-        builder.append(country);
-        builder.append("][detail=");
-        builder.append(detail);
-        builder.append("]]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     public boolean isValid() {
