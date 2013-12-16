@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.pojava.datetime.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,11 +159,7 @@ public class Episode implements Serializable {
     }
 
     public void setRating(String rating) {
-        try {
-            this.rating = Float.parseFloat(rating);
-        } catch (NumberFormatException ignore) {
-            this.rating = 0.0f;
-        }
+        this.rating = NumberUtils.toFloat(rating, 0.0f);
     }
 
     @Override
