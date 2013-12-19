@@ -22,6 +22,7 @@ package com.omertron.tvrageapi.tools;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -41,6 +42,7 @@ import org.yamj.api.common.http.CommonHttpClient;
 public class DOMHelper {
 
     private static CommonHttpClient httpClient;
+    private static final String DEFAULT_CHARSET = "UTF-8";
 
     // Hide the constructor
     protected DOMHelper() {
@@ -93,9 +95,9 @@ public class DOMHelper {
         String webPage;
 
         try {
-            webPage = httpClient.requestContent(url);
+            webPage = httpClient.requestContent(url, Charset.forName(DEFAULT_CHARSET));
 
-            in = new ByteArrayInputStream(webPage.getBytes("UTF-8"));
+            in = new ByteArrayInputStream(webPage.getBytes(DEFAULT_CHARSET));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
