@@ -383,7 +383,9 @@ public class TVRageParser {
             Node nGenre = nlGenres.item(loop);
             if (nGenre.getNodeType() == Node.ELEMENT_NODE) {
                 Element eGenre = (Element) nGenre;
-                showInfo.addGenre(eGenre.getFirstChild().getNodeValue());
+                if (eGenre.getFirstChild() != null) {
+                    showInfo.addGenre(eGenre.getFirstChild().getNodeValue());
+                }
             }
         }
     }
