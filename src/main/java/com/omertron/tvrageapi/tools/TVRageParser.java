@@ -49,6 +49,9 @@ public class TVRageParser {
     private static final String TITLE = "title";
     private static final String AIRDATE = "airdate";
     private static final String COUNTRY = "country";
+    // Constants
+    private static final int MATCH_SEASON = 1;
+    private static final int MATCH_EPISODE = 2;
 
     // Hide the constructor
     protected TVRageParser() {
@@ -250,8 +253,8 @@ public class TVRageParser {
         Matcher matcher = pattern.matcher(DOMHelper.getValueFromElement(eEpisodeInfo, "number"));
         if (matcher.find()) {
             EpisodeNumber en = new EpisodeNumber();
-            en.setSeason(matcher.group(1));
-            en.setEpisode(matcher.group(2));
+            en.setSeason(matcher.group(MATCH_SEASON));
+            en.setEpisode(matcher.group(MATCH_EPISODE));
             episode.setEpisodeNumber(en);
         }
 
