@@ -45,32 +45,40 @@ public class EpisodeList implements Serializable {
      */
     private String showName;
     private int totalSeasons;
-    private Map<EpisodeNumber, Episode> episodeList;
+    private Map<EpisodeNumber, Episode> episodes;
 
     public EpisodeList() {
         showName = TVRageApi.UNKNOWN;
         totalSeasons = 0;
-        episodeList = new TreeMap<EpisodeNumber, Episode>();
+        episodes = new TreeMap<EpisodeNumber, Episode>();
     }
 
     public boolean isValid() {
-        return isValidString(showName) && !episodeList.isEmpty();
+        return isValidString(showName) && !episodes.isEmpty();
     }
 
+    public Map<EpisodeNumber, Episode> getEpisodes() {
+        return episodes;
+    }
+
+    @Deprecated
+    /**
+     * Use getEpisodes instead
+     */
     public Map<EpisodeNumber, Episode> getEpisodeList() {
-        return episodeList;
+        return episodes;
     }
 
     public void setEpisodeList(Map<EpisodeNumber, Episode> episodeList) {
-        this.episodeList = episodeList;
+        this.episodes = episodeList;
     }
 
     public void addEpisode(Episode episode) {
-        episodeList.put(episode.getEpisodeNumber(), episode);
+        episodes.put(episode.getEpisodeNumber(), episode);
     }
 
     public Episode getEpisode(EpisodeNumber episodeNumber) {
-        return episodeList.get(episodeNumber);
+        return episodes.get(episodeNumber);
     }
 
     public Episode getEpisode(int season, int episode) {
