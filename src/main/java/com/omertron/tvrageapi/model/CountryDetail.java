@@ -22,6 +22,8 @@ package com.omertron.tvrageapi.model;
 import com.omertron.tvrageapi.TVRageApi;
 import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -84,5 +86,26 @@ public class CountryDetail implements Serializable {
 
     public boolean isValid() {
         return isValidString(country) && isValidString(detail);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(country)
+                .append(detail)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof CountryDetail) {
+            final CountryDetail other = (CountryDetail) obj;
+            return new EqualsBuilder()
+                    .append(country, other.country)
+                    .append(detail, other.detail)
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
 }

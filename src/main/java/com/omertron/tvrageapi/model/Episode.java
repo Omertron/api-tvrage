@@ -23,6 +23,8 @@ import com.omertron.tvrageapi.TVRageApi;
 import static com.omertron.tvrageapi.TVRageApi.isValidString;
 import java.io.Serializable;
 import java.util.Date;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -176,6 +178,31 @@ public class Episode implements Serializable {
             this.screenCap = screenCap.trim();
         } else {
             this.screenCap = UNKNOWN;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(episodeNumber)
+                .append(productionId)
+                .append(airDate)
+                .append(title)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Episode) {
+            final Episode other = (Episode) obj;
+            return new EqualsBuilder()
+                    .append(episodeNumber, other.episodeNumber)
+                    .append(productionId, other.productionId)
+                    .append(airDate, other.airDate)
+                    .append(title, other.title)
+                    .isEquals();
+        } else {
+            return false;
         }
     }
 }

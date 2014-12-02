@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -360,5 +362,30 @@ public class ShowInfo implements Serializable {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(country)
+                .append(showID)
+                .append(showName)
+                .append(totalSeasons)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ShowInfo) {
+            final ShowInfo other = (ShowInfo) obj;
+            return new EqualsBuilder()
+                    .append(country, other.country)
+                    .append(showID, other.showID)
+                    .append(showName, other.showName)
+                    .append(totalSeasons, other.totalSeasons)
+                    .isEquals();
+        } else {
+            return false;
+        }
     }
 }
