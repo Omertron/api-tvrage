@@ -75,7 +75,7 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
 
     private int calculateAbsolute(int season, int episode) {
         // Make the season very large for comparison purposes (will handle up to 1,000 episodes)
-        return ((season * FACTOR) + episode);
+        return (season * FACTOR) + episode;
     }
 
     @Override
@@ -137,7 +137,7 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
 
     public boolean isValid() {
         // False if either is 0
-        return (season * episode > 0);
+        return season * episode > 0;
     }
 
     @Override
