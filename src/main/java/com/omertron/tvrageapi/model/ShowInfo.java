@@ -188,7 +188,7 @@ public class ShowInfo implements Serializable {
     }
 
     public Date getStartDate() {
-        return (Date) startDate.clone();
+        return startDate == null ? null : (Date) startDate.clone();
     }
 
     public int getStarted() {

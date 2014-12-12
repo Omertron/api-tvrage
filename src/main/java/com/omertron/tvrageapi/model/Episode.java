@@ -96,11 +96,15 @@ public class Episode implements Serializable {
     }
 
     public Date getAirDate() {
-        return (Date) airDate.clone();
+        return airDate == null ? null : (Date) airDate.clone();
     }
 
     public void setAirDate(Date airDate) {
-        this.airDate = (Date) airDate.clone();
+        if (airDate == null) {
+            this.airDate = null;
+        } else {
+            this.airDate = (Date) airDate.clone();
+        }
     }
 
     public void setAirDate(String airDate) {
