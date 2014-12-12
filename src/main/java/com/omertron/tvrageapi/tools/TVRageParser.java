@@ -167,33 +167,21 @@ public class TVRageParser {
     }
 
     public static List<ShowInfo> getSearchShow(String searchUrl) {
-        List<ShowInfo> showList = new ArrayList<ShowInfo>();
-        ShowInfo showInfo;
-
-        Document doc = getDocFromUrl(searchUrl);
-        if (doc == null) {
-            return showList;
-        }
-
-        NodeList nlShowInfo = doc.getElementsByTagName("show");
-
-        if (nlShowInfo == null || nlShowInfo.getLength() == 0) {
-            return showList;
-        }
-
-        for (int loop = 0; loop < nlShowInfo.getLength(); loop++) {
-            Node nShowInfo = nlShowInfo.item(loop);
-            if (nShowInfo.getNodeType() == Node.ELEMENT_NODE) {
-                Element eShowInfo = (Element) nShowInfo;
-                showInfo = parseNextShowInfo(eShowInfo);
-                showList.add(showInfo);
-            }
-        }
-
-        return showList;
+        return processShowInfo(searchUrl, "show");
     }
 
     public static List<ShowInfo> getShowInfo(String searchUrl) {
+        return processShowInfo(searchUrl, "Showinfo");
+    }
+
+    /**
+     * Get a list of the ShowInfo from the specified tag
+     *
+     * @param searchUrl
+     * @param tagName
+     * @return
+     */
+    private static List<ShowInfo> processShowInfo(String searchUrl, String tagName) {
         List<ShowInfo> showList = new ArrayList<ShowInfo>();
         ShowInfo showInfo;
 
@@ -202,7 +190,7 @@ public class TVRageParser {
             return showList;
         }
 
-        NodeList nlShowInfo = doc.getElementsByTagName("Showinfo");
+        NodeList nlShowInfo = doc.getElementsByTagName(tagName);
 
         if (nlShowInfo == null || nlShowInfo.getLength() == 0) {
             return showList;
@@ -220,6 +208,13 @@ public class TVRageParser {
         return showList;
     }
 
+    /**
+     * Parse the episode node into an Episode object
+     *
+     * @param eEpisode
+     * @param season
+     * @return
+     */
     private static Episode parseEpisode(Element eEpisode, String season) {
         Episode episode = new Episode();
         EpisodeNumber en = new EpisodeNumber();
@@ -240,6 +235,12 @@ public class TVRageParser {
         return episode;
     }
 
+    /**
+     * Parse the episode info node into an Episode object
+     *
+     * @param eEpisodeInfo
+     * @return
+     */
     private static Episode parseEpisodeInfo(Element eEpisodeInfo) {
         Episode episode = new Episode();
 
@@ -261,6 +262,11 @@ public class TVRageParser {
         return episode;
     }
 
+    /**
+     * Parse the show info element into a ShowInfo object
+     * @param eShowInfo
+     * @return
+     */
     private static ShowInfo parseNextShowInfo(Element eShowInfo) {
         ShowInfo showInfo = new ShowInfo();
         String text;
