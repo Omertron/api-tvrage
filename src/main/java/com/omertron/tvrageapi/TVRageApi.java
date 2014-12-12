@@ -184,10 +184,6 @@ public class TVRageApi {
      * @param urlParameter
      */
     private StringBuilder buildURL(String urlParameter, String urlData) {
-        // apiSite + search.php 	  + apiKey + &show=buffy
-        // apiSite + showinfo.php 	  + apiKey + &sid=2930
-        // apiSite + episode_list.php     + apiKey + &sid=2930
-
         StringBuilder tvrageURL = new StringBuilder();
         tvrageURL.append(API_SITE);
         tvrageURL.append(urlParameter);

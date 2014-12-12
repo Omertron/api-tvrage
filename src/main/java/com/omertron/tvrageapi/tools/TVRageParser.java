@@ -136,34 +136,42 @@ public class TVRageParser {
      * @param nlSeasons
      */
     private static void processSeasons(EpisodeList epList, NodeList nlSeasons) {
-
         if (nlSeasons == null || nlSeasons.getLength() == 0) {
             return;
         }
 
         Node nEpisodeList;
-        Element eEpisodeList;
         for (int loop = 0; loop < nlSeasons.getLength(); loop++) {
             nEpisodeList = nlSeasons.item(loop);
             if (nEpisodeList.getNodeType() == Node.ELEMENT_NODE) {
-                eEpisodeList = (Element) nEpisodeList;
-                // Get the season number
-                String season = eEpisodeList.getAttribute("no");
-
-                NodeList nlEpisode = eEpisodeList.getElementsByTagName(EPISODE);
-                if (nlEpisode == null || nlEpisode.getLength() == 0) {
-                    continue;
-                }
-
-                for (int eLoop = 0; eLoop < nlEpisode.getLength(); eLoop++) {
-                    Node nEpisode = nlEpisode.item(eLoop);
-                    if (nEpisode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eEpisode = (Element) nEpisode;
-                        epList.addEpisode(parseEpisode(eEpisode, season));
-                    }
-                }
+                processSeasonEpisodes((Element) nEpisodeList, epList);
             }
         }
+    }
+
+    /**
+     * Process the episodes in the season and add them to the EpisodeList
+     *
+     * @param eEpisodeList
+     * @param epList
+     * @return
+     */
+    private static void processSeasonEpisodes(Element eEpisodeList, EpisodeList epList) {
+        // Get the season number
+        String season = eEpisodeList.getAttribute("no");
+
+        NodeList nlEpisode = eEpisodeList.getElementsByTagName(EPISODE);
+        if (nlEpisode == null || nlEpisode.getLength() == 0) {
+            return;
+        }
+
+        for (int eLoop = 0; eLoop < nlEpisode.getLength(); eLoop++) {
+            Node nEpisode = nlEpisode.item(eLoop);
+            if (nEpisode.getNodeType() == Node.ELEMENT_NODE) {
+                epList.addEpisode(parseEpisode((Element) nEpisode, season));
+            }
+        }
+
     }
 
     public static List<ShowInfo> getSearchShow(String searchUrl) {
@@ -264,6 +272,7 @@ public class TVRageParser {
 
     /**
      * Parse the show info element into a ShowInfo object
+     *
      * @param eShowInfo
      * @return
      */
