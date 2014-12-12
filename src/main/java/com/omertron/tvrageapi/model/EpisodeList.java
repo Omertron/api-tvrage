@@ -61,12 +61,13 @@ public class EpisodeList implements Serializable {
         return episodes;
     }
 
-    @Deprecated
     /**
-     * Use getEpisodes instead
+     * @deprecated Use getEpisodes instead
+     * @return
      */
+    @Deprecated
     public Map<EpisodeNumber, Episode> getEpisodeList() {
-        return episodes;
+        return getEpisodes();
     }
 
     public void setEpisodeList(Map<EpisodeNumber, Episode> episodeList) {
