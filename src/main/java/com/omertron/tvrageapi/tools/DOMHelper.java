@@ -20,7 +20,6 @@
 package com.omertron.tvrageapi.tools;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
