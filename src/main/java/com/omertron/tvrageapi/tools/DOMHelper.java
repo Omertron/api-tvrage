@@ -20,6 +20,7 @@
 package com.omertron.tvrageapi.tools;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -32,6 +33,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.yamj.api.common.http.CommonHttpClient;
+import org.yamj.api.common.http.DigestedResponse;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -92,12 +94,17 @@ public class DOMHelper {
             throws IOException, ParserConfigurationException, SAXException {
         Document doc = null;
         InputStream in = null;
-        String webPage;
 
         try {
-            webPage = httpClient.requestContent(url, Charset.forName(DEFAULT_CHARSET));
+            DigestedResponse response = httpClient.requestContent(url, Charset.forName(DEFAULT_CHARSET));
 
-            in = new ByteArrayInputStream(webPage.getBytes(DEFAULT_CHARSET));
+            if (response.getStatusCode() >= 500) {
+                throw new IOException("IOError: " + response.getStatusCode());
+            } else if (response.getStatusCode() >= 300) {
+                throw new IOException("IOError: " + response.getStatusCode());
+            }
+
+            in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
