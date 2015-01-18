@@ -20,24 +20,22 @@
 package com.omertron.tvrageapi.tools;
 
 import com.omertron.tvrageapi.TVRageApi;
+import com.omertron.tvrageapi.TVRageException;
 import com.omertron.tvrageapi.model.CountryDetail;
 import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.EpisodeNumber;
 import com.omertron.tvrageapi.model.ShowInfo;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.parsers.ParserConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 public class TVRageParser {
 
@@ -59,23 +57,11 @@ public class TVRageParser {
         throw new UnsupportedOperationException();
     }
 
-    private static Document getDocFromUrl(String searchUrl) {
-        Document doc = null;
-
-        try {
-            doc = DOMHelper.getEventDocFromUrl(searchUrl);
-        } catch (IOException ex) {
-            LOG.warn(LOG_MESSAGE + ex.getMessage(), ex);
-        } catch (ParserConfigurationException ex) {
-            LOG.warn(LOG_MESSAGE + ex.getMessage(), ex);
-        } catch (SAXException ex) {
-            LOG.warn(LOG_MESSAGE + ex.getMessage(), ex);
-        }
-
-        return doc;
+    private static Document getDocFromUrl(String searchUrl) throws TVRageException {
+        return DOMHelper.getEventDocFromUrl(searchUrl);
     }
 
-    public static Episode getEpisodeInfo(String searchUrl) {
+    public static Episode getEpisodeInfo(String searchUrl) throws TVRageException {
         Episode episode = new Episode();
 
         Document doc = getDocFromUrl(searchUrl);
@@ -96,7 +82,7 @@ public class TVRageParser {
         return episode;
     }
 
-    public static EpisodeList getEpisodeList(String searchUrl) {
+    public static EpisodeList getEpisodeList(String searchUrl) throws TVRageException {
         EpisodeList epList = new EpisodeList();
 
         Document doc = getDocFromUrl(searchUrl);
@@ -174,11 +160,11 @@ public class TVRageParser {
 
     }
 
-    public static List<ShowInfo> getSearchShow(String searchUrl) {
+    public static List<ShowInfo> getSearchShow(String searchUrl) throws TVRageException {
         return processShowInfo(searchUrl, "show");
     }
 
-    public static List<ShowInfo> getShowInfo(String searchUrl) {
+    public static List<ShowInfo> getShowInfo(String searchUrl) throws TVRageException {
         return processShowInfo(searchUrl, "Showinfo");
     }
 
@@ -189,7 +175,7 @@ public class TVRageParser {
      * @param tagName
      * @return
      */
-    private static List<ShowInfo> processShowInfo(String searchUrl, String tagName) {
+    private static List<ShowInfo> processShowInfo(String searchUrl, String tagName) throws TVRageException {
         List<ShowInfo> showList = new ArrayList<ShowInfo>();
         ShowInfo showInfo;
 

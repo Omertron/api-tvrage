@@ -55,14 +55,14 @@ public class TVRageApiTest {
     }
 
     @Test
-    public void testGetEpisodeInfo() {
+    public void testGetEpisodeInfo() throws TVRageException {
         LOG.info("test getEpisodeInfo");
         Episode episode = tvr.getEpisodeInfo(SHOW_ID_STR, "1", "1");
         assertTrue(episode.getTitle().equals("Chuck Versus the Intersect"));
     }
 
     @Test
-    public void testGetEpisodeList() {
+    public void testGetEpisodeList() throws TVRageException {
         LOG.info("test getEpisodeList");
         EpisodeList episodeList = tvr.getEpisodeList(SHOW_ID_STR);
         assertFalse(episodeList.getShowName().equals(TVRageApi.UNKNOWN));
@@ -70,21 +70,21 @@ public class TVRageApiTest {
     }
 
     @Test
-    public void testGetShowInfoInt() {
+    public void testGetShowInfoInt() throws TVRageException {
         LOG.info("test getShowInfoInt");
         ShowInfo showInfo = tvr.getShowInfo(SHOW_ID_INT);
         assertFalse(showInfo.getShowName().equals(TVRageApi.UNKNOWN));
     }
 
     @Test
-    public void testGetShowInfoString() {
+    public void testGetShowInfoString() throws TVRageException {
         LOG.info("test getShowInfoString");
         ShowInfo showInfo = tvr.getShowInfo(SHOW_ID_STR);
         assertFalse(showInfo.getShowName().equals(TVRageApi.UNKNOWN));
     }
 
     @Test
-    public void testSearchShow() {
+    public void testSearchShow() throws TVRageException {
         LOG.info("test searchShow");
         boolean found = false;
 

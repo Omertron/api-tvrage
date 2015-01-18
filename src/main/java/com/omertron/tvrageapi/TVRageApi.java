@@ -61,6 +61,11 @@ public class TVRageApi {
         this(apiKey, new DefaultPoolingHttpClient());
     }
 
+    /**
+     * Constructor, requires API key and a CommonHttpClient
+     * @param apiKey
+     * @param httpClient
+     */
     public TVRageApi(String apiKey, CommonHttpClient httpClient) {
         if (StringUtils.isBlank(apiKey)) {
             throw new UnsupportedOperationException("No API Key provided!");
@@ -78,8 +83,9 @@ public class TVRageApi {
      * @param seasonId
      * @param episodeId
      * @return
+     * @throws com.omertron.tvrageapi.TVRageException
      */
-    public Episode getEpisodeInfo(String showID, String seasonId, String episodeId) {
+    public Episode getEpisodeInfo(String showID, String seasonId, String episodeId) throws TVRageException {
         if (!isValidString(showID) || !isValidString(seasonId) || !isValidString(episodeId)) {
             return new Episode();
         }
@@ -97,8 +103,9 @@ public class TVRageApi {
      *
      * @param showID
      * @return
+     * @throws com.omertron.tvrageapi.TVRageException
      */
-    public EpisodeList getEpisodeList(String showID) {
+    public EpisodeList getEpisodeList(String showID) throws TVRageException {
         if (!isValidString(showID)) {
             return new EpisodeList();
         }
@@ -112,8 +119,9 @@ public class TVRageApi {
      *
      * @param showID
      * @return ShowInfo
+     * @throws com.omertron.tvrageapi.TVRageException
      */
-    public ShowInfo getShowInfo(int showID) {
+    public ShowInfo getShowInfo(int showID) throws TVRageException {
         if (showID == 0) {
             return new ShowInfo();
         }
@@ -131,8 +139,9 @@ public class TVRageApi {
      * Get the show information using the show ID
      * @param showID
      * @return
+     * @throws com.omertron.tvrageapi.TVRageException
      */
-    public ShowInfo getShowInfo(String showID) {
+    public ShowInfo getShowInfo(String showID) throws TVRageException {
         int id = NumberUtils.toInt(showID, 0);
         if (id > 0) {
             return getShowInfo(id);
@@ -146,8 +155,9 @@ public class TVRageApi {
      *
      * @param showName
      * @return list of matching shows
+     * @throws com.omertron.tvrageapi.TVRageException
      */
-    public List<ShowInfo> searchShow(String showName) {
+    public List<ShowInfo> searchShow(String showName) throws TVRageException {
         if (!isValidString(showName)) {
             return new ArrayList<ShowInfo>();
         }

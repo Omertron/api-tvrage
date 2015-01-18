@@ -19,6 +19,7 @@
  */
 package com.omertron.tvrageapi.tools;
 
+import com.omertron.tvrageapi.TVRageException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,11 +27,14 @@ import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.yamj.api.common.exception.ApiExceptionType;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
 
@@ -42,8 +46,11 @@ import org.yamj.api.common.http.DigestedResponse;
  */
 public class DOMHelper {
 
+    private static final Logger LOG = LoggerFactory.getLogger(DOMHelper.class);
+
     private static CommonHttpClient httpClient;
     private static final String DEFAULT_CHARSET = "UTF-8";
+    private static final String UNABLE_TO_PARSE = "Unable to parse response, please try again later.";
 
     // Hide the constructor
     protected DOMHelper() {
@@ -85,12 +92,9 @@ public class DOMHelper {
      *
      * @param url
      * @return
-     * @throws IOException
-     * @throws ParserConfigurationException
-     * @throws SAXException
+     * @throws com.omertron.tvrageapi.TVRageException
      */
-    public static Document getEventDocFromUrl(String url)
-            throws IOException, ParserConfigurationException, SAXException {
+    public static Document getEventDocFromUrl(String url) throws TVRageException {
         Document doc = null;
         InputStream in = null;
 
@@ -98,9 +102,9 @@ public class DOMHelper {
             DigestedResponse response = httpClient.requestContent(url, Charset.forName(DEFAULT_CHARSET));
 
             if (response.getStatusCode() >= 500) {
-                throw new IOException("IOError: " + response.getStatusCode());
+                throw new TVRageException(ApiExceptionType.HTTP_503_ERROR, url);
             } else if (response.getStatusCode() >= 300) {
-                throw new IOException("IOError: " + response.getStatusCode());
+                throw new TVRageException(ApiExceptionType.HTTP_404_ERROR, url);
             }
 
             in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET));
@@ -109,9 +113,20 @@ public class DOMHelper {
             DocumentBuilder db = dbf.newDocumentBuilder();
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
+        } catch (ParserConfigurationException error) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
+        } catch (SAXException error) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
+        } catch (IOException error) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         } finally {
-            if (in != null) {
-                in.close();
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+                // Input Stream was already closed or null
+                LOG.trace("Stream already closed for getEventDocFromUrl", ex);
             }
         }
         return doc;
