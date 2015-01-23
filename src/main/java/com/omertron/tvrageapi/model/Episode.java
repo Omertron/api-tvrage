@@ -112,7 +112,7 @@ public class Episode implements Serializable {
             try {
                 this.airDate = (new DateTime(airDate)).toDate();
             } catch (Exception ex) {
-                LOG.trace("Failed to convert date: " + airDate, ex);
+                LOG.trace("Failed to convert date: {}", airDate, ex);
                 this.airDate = null;
             }
         } else {

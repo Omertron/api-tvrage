@@ -312,7 +312,7 @@ public class ShowInfo implements Serializable {
             try {
                 this.startDate = (new DateTime(startDate)).toDate();
             } catch (Exception ex) {
-                LOG.trace("Failed to convert date: " + startDate, ex);
+                LOG.trace("Failed to convert date: {}", startDate, ex);
                 // We can't do anything about this error, so return
                 this.startDate = null;
             }

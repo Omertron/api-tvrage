@@ -214,7 +214,7 @@ public class TVRageApi {
             return new StringBuilder(UNKNOWN);
         }
 
-        LOG.trace("Search URL: " + tvrageURL);
+        LOG.trace("Search URL: {}", tvrageURL);
         return tvrageURL;
     }
 
