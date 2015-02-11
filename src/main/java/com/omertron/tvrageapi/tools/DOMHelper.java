@@ -27,6 +27,8 @@ import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -35,8 +37,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.yamj.api.common.exception.ApiExceptionType;
-import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DigestedResponse;
+import org.yamj.api.common.http.DigestedResponseReader;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -48,8 +50,9 @@ public class DOMHelper {
 
     private static final Logger LOG = LoggerFactory.getLogger(DOMHelper.class);
 
-    private static CommonHttpClient httpClient;
+    private static CloseableHttpClient httpClient;
     private static final String DEFAULT_CHARSET = "UTF-8";
+    private static final Charset CHARSET = Charset.forName(DEFAULT_CHARSET);
     private static final String UNABLE_TO_PARSE = "Unable to parse response, please try again later.";
 
     // Hide the constructor
@@ -58,7 +61,7 @@ public class DOMHelper {
         throw new UnsupportedOperationException();
     }
 
-    public static void setHttpClient(CommonHttpClient httpClient) {
+    public static void setHttpClient(CloseableHttpClient httpClient) {
         DOMHelper.httpClient = httpClient;
     }
 
@@ -99,7 +102,9 @@ public class DOMHelper {
         InputStream in = null;
 
         try {
-            DigestedResponse response = httpClient.requestContent(url, Charset.forName(DEFAULT_CHARSET));
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.addHeader("accept", "application/xml");
+            final DigestedResponse response = DigestedResponseReader.requestContent(httpClient, httpGet, CHARSET);
 
             if (response.getStatusCode() >= 500) {
                 throw new TVRageException(ApiExceptionType.HTTP_503_ERROR, url);

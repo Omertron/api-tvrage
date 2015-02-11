@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 /**
@@ -43,7 +43,7 @@ public class TVRageApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(TVRageApi.class);
     private String apiKey = null;
-    private CommonHttpClient httpClient;
+    private CloseableHttpClient httpClient;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
     private static final String API_EPISODE_LIST = "episode_list.php";
@@ -66,7 +66,7 @@ public class TVRageApi {
      * @param apiKey
      * @param httpClient
      */
-    public TVRageApi(String apiKey, CommonHttpClient httpClient) {
+    public TVRageApi(String apiKey, CloseableHttpClient httpClient) {
         if (StringUtils.isBlank(apiKey)) {
             throw new UnsupportedOperationException("No API Key provided!");
         }
@@ -164,28 +164,6 @@ public class TVRageApi {
 
         String tvrageURL = buildURL(API_SEARCH, showName).toString();
         return TVRageParser.getSearchShow(tvrageURL);
-    }
-
-    /**
-     * Set the web browser proxy information
-     *
-     * @param host
-     * @param port
-     * @param username
-     * @param password
-     */
-    public void setProxy(String host, int port, String username, String password) {
-        httpClient.setProxy(host, port, username, password);
-    }
-
-    /**
-     * Set the web browser timeout settings
-     *
-     * @param webTimeoutConnect
-     * @param webTimeoutRead
-     */
-    public void setTimeout(int webTimeoutConnect, int webTimeoutRead) {
-        httpClient.setTimeouts(webTimeoutConnect, webTimeoutRead);
     }
 
     /**
