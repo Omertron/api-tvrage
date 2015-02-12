@@ -82,8 +82,8 @@ public class EpisodeNumber implements Comparable<EpisodeNumber>, Serializable {
 
     @Override
     public int compareTo(EpisodeNumber anotherEpisodeNumber) {
-        int otherSeason = ((EpisodeNumber) anotherEpisodeNumber).getSeason();
-        int otherEpisode = ((EpisodeNumber) anotherEpisodeNumber).getEpisode();
+        int otherSeason = anotherEpisodeNumber.getSeason();
+        int otherEpisode = anotherEpisodeNumber.getEpisode();
 
         return calculateAbsolute(season, episode) - calculateAbsolute(otherSeason, otherEpisode);
     }

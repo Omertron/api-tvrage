@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.yamj.api.common.exception.ApiExceptionType;
@@ -86,7 +85,7 @@ public class DOMHelper {
             if (tagNodeList == null || tagNodeList.getLength() == 0) {
                 return "";
             }
-            return ((Node) tagNodeList.item(0)).getNodeValue();
+            return tagNodeList.item(0).getNodeValue();
         }
     }
 
