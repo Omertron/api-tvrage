@@ -30,8 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -39,8 +37,6 @@ import org.w3c.dom.NodeList;
 
 public class TVRageParser {
 
-    private static final String LOG_MESSAGE = "TVRage Error: ";
-    private static final Logger LOG = LoggerFactory.getLogger(TVRageParser.class);
     // Literals
     private static final String EPISODE = "episode";
     private static final String SUMMARY = "summary";

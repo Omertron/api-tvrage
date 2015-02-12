@@ -31,7 +31,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yamj.api.common.http.DefaultPoolingHttpClient;
+import org.yamj.api.common.http.SimpleHttpClientBuilder;
 
 /**
  * TV Rage API
@@ -43,7 +43,6 @@ public class TVRageApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(TVRageApi.class);
     private String apiKey = null;
-    private CloseableHttpClient httpClient;
     public static final String UNKNOWN = "UNKNOWN";
     private static final String API_EPISODE_INFO = "episodeinfo.php";
     private static final String API_EPISODE_LIST = "episode_list.php";
@@ -57,12 +56,13 @@ public class TVRageApi {
      * @param apiKey
      */
     public TVRageApi(String apiKey) {
-        // Use a default pooling client if one is not provided
-        this(apiKey, new DefaultPoolingHttpClient());
+        // Use a default http client if one is not provided
+        this(apiKey, new SimpleHttpClientBuilder().build());
     }
 
     /**
      * Constructor, requires API key and a CommonHttpClient
+     *
      * @param apiKey
      * @param httpClient
      */
@@ -72,7 +72,6 @@ public class TVRageApi {
         }
 
         this.apiKey = apiKey;
-        this.httpClient = httpClient;
         DOMHelper.setHttpClient(httpClient);
     }
 
@@ -137,6 +136,7 @@ public class TVRageApi {
 
     /**
      * Get the show information using the show ID
+     *
      * @param showID
      * @return
      * @throws com.omertron.tvrageapi.TVRageException
