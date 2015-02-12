@@ -59,11 +59,7 @@ public class TVRageParser {
 
     public static Episode getEpisodeInfo(String searchUrl) throws TVRageException {
         Episode episode = new Episode();
-
         Document doc = getDocFromUrl(searchUrl);
-        if (doc == null) {
-            return episode;
-        }
 
         // The EpisodeInfo contains show information as well, but we will skip this
         NodeList nlEpisode = doc.getElementsByTagName(EPISODE);
@@ -80,11 +76,7 @@ public class TVRageParser {
 
     public static EpisodeList getEpisodeList(String searchUrl) throws TVRageException {
         EpisodeList epList = new EpisodeList();
-
         Document doc = getDocFromUrl(searchUrl);
-        if (doc == null) {
-            return epList;
-        }
 
         NodeList nlEpisodeList;
         Node nEpisodeList;
@@ -176,10 +168,6 @@ public class TVRageParser {
         ShowInfo showInfo;
 
         Document doc = getDocFromUrl(searchUrl);
-        if (doc == null) {
-            return showList;
-        }
-
         NodeList nlShowInfo = doc.getElementsByTagName(tagName);
 
         if (nlShowInfo == null || nlShowInfo.getLength() == 0) {

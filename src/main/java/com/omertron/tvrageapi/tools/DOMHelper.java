@@ -97,7 +97,7 @@ public class DOMHelper {
      * @throws com.omertron.tvrageapi.TVRageException
      */
     public static Document getEventDocFromUrl(String url) throws TVRageException {
-        Document doc = null;
+        Document doc;
         InputStream in = null;
 
         try {
@@ -117,6 +117,7 @@ public class DOMHelper {
             DocumentBuilder db = dbf.newDocumentBuilder();
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
+            return doc;
         } catch (ParserConfigurationException error) {
             throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
         } catch (SAXException error) {
@@ -133,6 +134,5 @@ public class DOMHelper {
                 LOG.trace("Stream already closed for getEventDocFromUrl", ex);
             }
         }
-        return doc;
     }
 }
