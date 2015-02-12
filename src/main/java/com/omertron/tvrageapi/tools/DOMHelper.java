@@ -101,6 +101,40 @@ public class DOMHelper {
         InputStream in = null;
 
         try {
+            in = new ByteArrayInputStream(requestWebContent(url));
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            doc = db.parse(in);
+            doc.getDocumentElement().normalize();
+            return doc;
+        } catch (ParserConfigurationException ex) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
+        } catch (SAXException ex) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
+        } catch (IOException ex) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+                // Input Stream was already closed or null
+                LOG.trace("Stream already closed for getEventDocFromUrl", ex);
+            }
+        }
+    }
+
+    /**
+     * Get content from URL in byte array
+     *
+     * @param url
+     * @return
+     * @throws TVRageException
+     */
+    private static byte[] requestWebContent(String url) throws TVRageException {
+        try {
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("accept", "application/xml");
             final DigestedResponse response = DigestedResponseReader.requestContent(httpClient, httpGet, CHARSET);
@@ -111,28 +145,9 @@ public class DOMHelper {
                 throw new TVRageException(ApiExceptionType.HTTP_404_ERROR, url);
             }
 
-            in = new ByteArrayInputStream(response.getContent().getBytes(DEFAULT_CHARSET));
-
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            doc = db.parse(in);
-            doc.getDocumentElement().normalize();
-            return doc;
-        } catch (ParserConfigurationException error) {
-            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
-        } catch (SAXException error) {
-            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
-        } catch (IOException error) {
-            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, error);
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                // Input Stream was already closed or null
-                LOG.trace("Stream already closed for getEventDocFromUrl", ex);
-            }
+            return response.getContent().getBytes(DEFAULT_CHARSET);
+        } catch (IOException ex) {
+            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
         }
     }
 }
