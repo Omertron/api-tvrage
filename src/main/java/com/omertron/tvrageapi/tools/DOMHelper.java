@@ -27,8 +27,8 @@ import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -49,7 +49,7 @@ public class DOMHelper {
 
     private static final Logger LOG = LoggerFactory.getLogger(DOMHelper.class);
 
-    private static CloseableHttpClient httpClient;
+    private static HttpClient httpClient;
     private static final String DEFAULT_CHARSET = "UTF-8";
     private static final Charset CHARSET = Charset.forName(DEFAULT_CHARSET);
     private static final String UNABLE_TO_PARSE = "Unable to parse response, please try again later.";
@@ -60,7 +60,7 @@ public class DOMHelper {
         throw new UnsupportedOperationException();
     }
 
-    public static void setHttpClient(CloseableHttpClient httpClient) {
+    public static void setHttpClient(HttpClient httpClient) {
         DOMHelper.httpClient = httpClient;
     }
 

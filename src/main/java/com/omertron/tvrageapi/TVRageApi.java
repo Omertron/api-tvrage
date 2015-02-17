@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yamj.api.common.http.SimpleHttpClientBuilder;
@@ -66,7 +66,7 @@ public class TVRageApi {
      * @param apiKey
      * @param httpClient
      */
-    public TVRageApi(String apiKey, CloseableHttpClient httpClient) {
+    public TVRageApi(String apiKey, HttpClient httpClient) {
         if (StringUtils.isBlank(apiKey)) {
             throw new UnsupportedOperationException("No API Key provided!");
         }
