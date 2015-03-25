@@ -159,7 +159,7 @@ public class TVRageApi {
      */
     public List<ShowInfo> searchShow(String showName) throws TVRageException {
         if (!isValidString(showName)) {
-            return new ArrayList<ShowInfo>();
+            return new ArrayList<>();
         }
 
         String tvrageURL = buildURL(API_SEARCH, showName).toString();

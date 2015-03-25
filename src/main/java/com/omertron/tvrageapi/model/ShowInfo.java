@@ -52,12 +52,12 @@ public class ShowInfo implements Serializable {
      */
     private String airDay = TVRageApi.UNKNOWN;
     private String airTime = TVRageApi.UNKNOWN;
-    private List<CountryDetail> akas = new ArrayList<CountryDetail>();
+    private List<CountryDetail> akas = new ArrayList<>();
     private String classification = TVRageApi.UNKNOWN;
     private String country = TVRageApi.UNKNOWN;
     private String ended = TVRageApi.UNKNOWN;
-    private List<String> genres = new ArrayList<String>();
-    private List<CountryDetail> network = new ArrayList<CountryDetail>();
+    private List<String> genres = new ArrayList<>();
+    private List<CountryDetail> network = new ArrayList<>();
     private String originCountry = TVRageApi.UNKNOWN;
     private int runtime = 0;
     private int showID = 0;

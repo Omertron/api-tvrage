@@ -108,11 +108,7 @@ public class DOMHelper {
             doc = db.parse(in);
             doc.getDocumentElement().normalize();
             return doc;
-        } catch (ParserConfigurationException ex) {
-            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
-        } catch (SAXException ex) {
-            throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
-        } catch (IOException ex) {
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
             throw new TVRageException(ApiExceptionType.MAPPING_FAILED, UNABLE_TO_PARSE, url, ex);
         } finally {
             try {

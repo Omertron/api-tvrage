@@ -50,7 +50,7 @@ public class EpisodeList implements Serializable {
     public EpisodeList() {
         showName = TVRageApi.UNKNOWN;
         totalSeasons = 0;
-        episodes = new TreeMap<EpisodeNumber, Episode>();
+        episodes = new TreeMap<>();
     }
 
     public boolean isValid() {
@@ -59,15 +59,6 @@ public class EpisodeList implements Serializable {
 
     public Map<EpisodeNumber, Episode> getEpisodes() {
         return episodes;
-    }
-
-    /**
-     * @deprecated Use getEpisodes instead
-     * @return
-     */
-    @Deprecated
-    public Map<EpisodeNumber, Episode> getEpisodeList() {
-        return getEpisodes();
     }
 
     public void setEpisodeList(Map<EpisodeNumber, Episode> episodeList) {

@@ -164,7 +164,7 @@ public class TVRageParser {
      * @return
      */
     private static List<ShowInfo> processShowInfo(String searchUrl, String tagName) throws TVRageException {
-        List<ShowInfo> showList = new ArrayList<ShowInfo>();
+        List<ShowInfo> showList = new ArrayList<>();
         ShowInfo showInfo;
 
         Document doc = getDocFromUrl(searchUrl);

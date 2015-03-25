@@ -66,7 +66,7 @@ public class TVRageApiTest {
         LOG.info("test getEpisodeList");
         EpisodeList episodeList = tvr.getEpisodeList(SHOW_ID_STR);
         assertFalse(episodeList.getShowName().equals(TVRageApi.UNKNOWN));
-        assertFalse(episodeList.getEpisodeList().isEmpty());
+        assertFalse(episodeList.getEpisodes().isEmpty());
     }
 
     @Test
