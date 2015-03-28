@@ -73,6 +73,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <distribution.format>zip</distribution.format>
         <version.slf4j>1.7.10</version.slf4j>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -146,8 +148,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
                     <failOnError>true</failOnError>
                     <verbose>true</verbose>
                     <!-- excludes><exclude>**/*</exclude></excludes -->
