@@ -23,9 +23,9 @@ import com.omertron.tvrageapi.model.Episode;
 import com.omertron.tvrageapi.model.EpisodeList;
 import com.omertron.tvrageapi.model.ShowInfo;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -47,18 +47,14 @@ public class TVRageApiTest {
 
     @BeforeClass
     public static void setUpClass() {
-        TestLogger.Configure();
-    }
-
-    @Before
-    public void setUp() throws Exception {
+        TestLogger.configure();
     }
 
     @Test
     public void testGetEpisodeInfo() throws TVRageException {
         LOG.info("test getEpisodeInfo");
         Episode episode = tvr.getEpisodeInfo(SHOW_ID_STR, "1", "1");
-        assertTrue(episode.getTitle().equals("Chuck Versus the Intersect"));
+        assertEquals("Chuck Versus the Intersect", episode.getTitle());
     }
 
     @Test
